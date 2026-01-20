@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: MetriPlate
+
+  profiles:
+    active: ${SPRING_ACTIVE_PROFILE}
+
+  datasource:
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+
+

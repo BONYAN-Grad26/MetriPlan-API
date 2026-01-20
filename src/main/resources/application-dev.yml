@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/metriplate
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
