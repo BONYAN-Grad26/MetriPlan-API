@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.enums;
 
-public enum Allergen {
+public enum AllergenType {
     GLUTEN,
     LUPIN,
     CRUSTACEAN,

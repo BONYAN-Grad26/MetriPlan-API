@@ -28,22 +28,16 @@ public class Ingredient {
     private IngredientCategory category;
 
     // Per 100g measurements
-    @Column(precision = 10, scale = 2)
     private Double calories;
 
-    @Column(precision = 10, scale = 2)
     private Double protein; // in grams
 
-    @Column(precision = 10, scale = 2)
     private Double carbohydrates;
 
-    @Column(precision = 10, scale = 2)
     private Double fat;
 
-    @Column(precision = 10, scale = 2)
     private Double fiber;
 
-    @Column(precision = 10, scale = 2)
     private Double sugar;
 
     @OneToMany(mappedBy = "ingredient", cascade =  CascadeType.ALL, orphanRemoval = true)

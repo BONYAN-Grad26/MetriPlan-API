@@ -28,16 +28,12 @@ public class WeeklyPlan {
     private LocalDate endDate;
 
     // Weekly nutritional targets (AI-calculated)
-    @Column(precision = 8, scale = 2)
     private Double weeklyCalorieTarget;
 
-    @Column(precision = 7, scale = 2)
     private Double weeklyProteinTarget;
 
-    @Column(precision = 7, scale = 2)
     private Double weeklyCarbTarget;
 
-    @Column(precision = 7, scale = 2)
     private Double weeklyFatTarget;
 
 
@@ -55,17 +51,13 @@ public class WeeklyPlan {
     @Column(length = 1000)
     private String aiPreparationTips;
 
-    @Column(precision = 8, scale = 2)
     private Double actualCaloriesConsumed;
 
-    @Column(precision = 7, scale = 2)
     private Double actualProteinConsumed;
 
     // Weekly metrics (calculated)
-    @Column(precision = 5, scale = 2)
     private Double averageDailyCalories;
 
-    @Column(precision = 5, scale = 2)
     private Double adherenceRate; // Percentage of meals followed
 
     // User feedback

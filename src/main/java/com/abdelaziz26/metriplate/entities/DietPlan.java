@@ -49,16 +49,12 @@ public class DietPlan {
     private Boolean includeSnacks = true;
 
     // Nutritional configuration
-    @Column(precision = 7, scale = 2)
     private Double dailyCalorieTarget;
 
-    @Column(precision = 5, scale = 2)
     private Double proteinPercentage;
 
-    @Column(precision = 5, scale = 2)
     private Double carbPercentage;
 
-    @Column(precision = 5, scale = 2)
     private Double fatPercentage;
 
     @Column(length = 2000)

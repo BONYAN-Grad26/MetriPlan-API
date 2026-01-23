@@ -25,7 +25,7 @@ import java.util.Optional;
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -50,16 +50,21 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null)
         {
-            UserDetails user = userDetailsService.loadUserByUsername(email);
+            Optional<User> user = userRepository.findByEmail(email);
 
-            boolean isValid = jwtService.validateToken(token, user);
+            if(user.isEmpty()) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            boolean isValid = jwtService.validateToken(token, user.get());
 
             if(!isValid) {
                 filterChain.doFilter(request, response);
                 return;
             }
 
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.get().getAuthorities());
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(auth);
 

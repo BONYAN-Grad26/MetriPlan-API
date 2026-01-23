@@ -27,4 +27,7 @@ public class Nutrient {
 
     @ManyToMany(mappedBy = "nutrients")
     private List<Ingredient> ingredients;
+
+    @OneToMany(mappedBy = "nutrient", cascade =  CascadeType.ALL, orphanRemoval = true)
+    private List<Allergy>  allergies;
 }

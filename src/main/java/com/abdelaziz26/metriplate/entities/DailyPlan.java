@@ -30,28 +30,20 @@ public class DailyPlan {
     private Integer dayOfWeek; // 1-7 (Monday = 1)
 
     // Target nutritional goals (AI-generated)
-    @Column(precision = 7, scale = 2)
     private Double targetCalories;
 
-    @Column(precision = 6, scale = 2)
     private Double targetProtein;
 
-    @Column(precision = 6, scale = 2)
     private Double targetCarbs;
 
-    @Column(precision = 6, scale = 2)
     private Double targetFat;
 
-    @Column(precision = 6, scale = 2)
     private Double targetFiber;
 
-    @Column(precision = 6, scale = 2)
     private Double targetSugar;
 
-    @Column(precision = 6, scale = 2)
     private Double waterGoal; // in ml
 
-    @Column(precision = 6, scale = 2)
     private Double waterConsumed;
 
     // Meals for this day (AI-suggested)
@@ -59,16 +51,12 @@ public class DailyPlan {
     private List<DailyPlanMeal> meals = new ArrayList<>();
 
     // Actual consumption (user-tracked)
-    @Column(precision = 7, scale = 2)
     private Double actualCaloriesConsumed;
 
-    @Column(precision = 6, scale = 2)
     private Double actualProteinConsumed;
 
-    @Column(precision = 6, scale = 2)
     private Double actualCarbsConsumed;
 
-    @Column(precision = 6, scale = 2)
     private Double actualFatConsumed;
 
     // AI-specific fields
