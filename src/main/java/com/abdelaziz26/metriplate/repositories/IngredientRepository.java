@@ -1,0 +1,25 @@
+package com.abdelaziz26.metriplate.repositories;
+
+import com.abdelaziz26.metriplate.entities.Ingredient;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.Optional;
+
+public interface IngredientRepository extends JpaRepository<@NotNull Ingredient, @NotNull Long>, JpaSpecificationExecutor<@NotNull Ingredient> {
+
+    @EntityGraph(attributePaths = {"dietaryTags", "nutrients"})
+    @NotNull Optional<Ingredient> findByName(@NotNull String name);
+
+    @EntityGraph(attributePaths = {"dietaryTags", "nutrients"})
+    @NotNull Optional<Ingredient> findById(Long id);
+
+    Boolean existsByName(@NotNull String name);
+
+    @NotNull Page<@NotNull Ingredient> findAll(@NotNull Pageable pageable);
+}

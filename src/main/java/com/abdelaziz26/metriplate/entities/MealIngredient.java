@@ -25,10 +25,10 @@ public class MealIngredient {
     private String measurementUnit; // g, ml, cups, pieces, etc.
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "meal-id")
+    @JoinColumn(nullable = false, name = "meal_id")
     private Meal meal;
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "ingredient-id")
+    @JoinColumn(nullable = false, name = "ingredient_id")
     private Ingredient ingredient;
 }
