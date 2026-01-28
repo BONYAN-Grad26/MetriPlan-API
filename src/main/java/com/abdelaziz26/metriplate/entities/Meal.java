@@ -3,16 +3,14 @@ package com.abdelaziz26.metriplate.entities;
 import com.abdelaziz26.metriplate.enums.MealType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity @Table(name = "meals")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
+@Builder
 public class Meal {
 
     @Id
