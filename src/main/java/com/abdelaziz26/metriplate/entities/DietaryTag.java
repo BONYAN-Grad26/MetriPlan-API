@@ -2,17 +2,16 @@ package com.abdelaziz26.metriplate.entities;
 
 import com.abdelaziz26.metriplate.enums.DietaryTagType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name = "dietary_tag")
 @Getter
 @Setter
 @NoArgsConstructor @AllArgsConstructor
+@Builder
 public class DietaryTag {
 
     @Id
@@ -25,6 +24,7 @@ public class DietaryTag {
     private String name;
     private String description;
 
+    @Builder.Default
     @ManyToMany(mappedBy = "dietaryTags")
-    private List<Ingredient> ingredients;
+    private List<Ingredient> ingredients = new ArrayList<>();
 }
