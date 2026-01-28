@@ -2,10 +2,7 @@ package com.abdelaziz26.metriplate.entities;
 
 import com.abdelaziz26.metriplate.enums.AllergenType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor @AllArgsConstructor
+@Builder
 public class Allergy {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +20,14 @@ public class Allergy {
     private AllergenType type;
 
     private String name;
+
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nutrient_id", nullable = false)
     private Nutrient nutrient;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
