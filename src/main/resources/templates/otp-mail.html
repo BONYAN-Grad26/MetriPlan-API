@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MetriPlate - OTP Verification</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2C7BE5;
+            margin-bottom: 20px;
+        }
+
+        .otp {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .message {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        MetriPlate
+    </div>
+
+    <p class="message">
+        Hello <span th:text="${name}">User</span>,
+    </p>
+
+    <p class="message">
+        Your One-Time Password (OTP) for verification is:
+    </p>
+
+    <div class="otp" th:text="${otp}">
+        123456
+    </div>
+
+    <p class="message">
+        This code will expire in <b th:text="${expiryMinutes}">5</b> minutes.
+        Please do not share it with anyone.
+    </p>
+
+    <p class="message">
+        If you didn’t request this code, please ignore this email.
+    </p>
+
+    <div class="footer">
+        © 2026 MetriPlate. All rights reserved.
+    </div>
+
+</div>
+
+</body>
+</html>
