@@ -40,7 +40,6 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
-        log.info("Request path is {}", request.getServletPath());
         log.info("Request URI is {}", request.getRequestURI());
 
         String authHeader = request.getHeader("Authorization");

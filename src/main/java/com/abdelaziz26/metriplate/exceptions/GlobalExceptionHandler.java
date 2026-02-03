@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -35,18 +36,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<@NotNull Result<Object, Error>> handleException(Exception ex) {
-        log.error(ex.getMessage(), ex);
-        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<@NotNull Result<Object, Error>> handleNullPointerException(NullPointerException ex) {
-        log.error(ex.getMessage(), ex);
-        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
     @ExceptionHandler(MessagingException.class)
     public ResponseEntity<@NotNull Result<Object, Error>> handleMessagingException(MessagingException ex) {
         log.error(ex.getMessage(), ex);
@@ -58,4 +47,23 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage(), ex);
         return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handleAuthenticationException(AuthenticationException ex) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(Result.CreateErrorResult(Errors.BadRequestErr(ex.getMessage())), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handleNullPointerException(NullPointerException ex) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handleException(Exception ex) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
