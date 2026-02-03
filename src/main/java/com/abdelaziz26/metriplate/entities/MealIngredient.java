@@ -1,16 +1,14 @@
 package com.abdelaziz26.metriplate.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity @Table(name = "meal_ingredients")
+@Builder
 public class MealIngredient {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
