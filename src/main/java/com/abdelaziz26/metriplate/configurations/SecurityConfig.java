@@ -1,6 +1,8 @@
 package com.abdelaziz26.metriplate.configurations;
 
 import com.abdelaziz26.metriplate.repositories.UserRepository;
+import com.abdelaziz26.metriplate.security.CustomAccessDeniedHandler;
+import com.abdelaziz26.metriplate.security.CustomAuthenticationEntryPoint;
 import com.abdelaziz26.metriplate.security.JwtFilter;
 import com.abdelaziz26.metriplate.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,8 @@ public class SecurityConfig {
 
     private final UserRepository userRepository;
     private final JwtFilter jwtFilter;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,7 +38,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests.requestMatchers("/api/**").permitAll()
                 ).csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(AbstractHttpConfigurer::disable);
+                .sessionManagement(AbstractHttpConfigurer::disable)
+                .exceptionHandling(ehc ->
+                        ehc.authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .accessDeniedHandler(customAccessDeniedHandler));
 
         http.addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
