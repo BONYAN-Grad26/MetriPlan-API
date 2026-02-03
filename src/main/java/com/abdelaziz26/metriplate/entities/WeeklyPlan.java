@@ -1,10 +1,7 @@
 package com.abdelaziz26.metriplate.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class WeeklyPlan {
 
     @Id

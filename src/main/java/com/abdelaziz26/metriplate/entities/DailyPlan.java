@@ -2,10 +2,7 @@ package com.abdelaziz26.metriplate.entities;
 
 import com.abdelaziz26.metriplate.enums.DayStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class DailyPlan {
 
     @Id
@@ -59,14 +57,9 @@ public class DailyPlan {
 
     private Double actualFatConsumed;
 
-    // AI-specific fields
-    private String aiDailyTheme; // e.g., "High Protein Day", "Carb Cycling Day"
 
     @Column(length = 1000)
     private String aiDailyTips; // AI-generated tips for the day
-
-    @Column(length = 500)
-    private String aiShoppingNotes; // Special items needed for this day
 
     // User feedback
     private Integer userRating; // 1-5 stars
