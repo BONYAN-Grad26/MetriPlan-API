@@ -1,4 +1,4 @@
-package com.abdelaziz26.metriplate.services.Tag;
+package com.abdelaziz26.metriplate.services.tag;
 
 import com.abdelaziz26.metriplate.dtos.tag.CreateDietaryTagDto;
 import com.abdelaziz26.metriplate.dtos.tag.DietaryTagDto;
