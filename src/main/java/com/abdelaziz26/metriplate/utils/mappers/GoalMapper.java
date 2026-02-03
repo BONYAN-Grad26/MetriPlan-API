@@ -61,8 +61,9 @@ public class GoalMapper {
     public GoalSummaryDto toSummary(Goal goal) {
         return GoalSummaryDto.builder()
                 .id(goal.getId())
+                .title(goal.getDescription())
                 .status(goal.getStatus().toString())
-                .targetCalories(goal.getTargetCalories())
+                .type(goal.getGoalType().toString())
                 .progressPercentage(null) // logic needed
                 .daysRemaining(ChronoUnit.DAYS.between(LocalDate.now(), goal.getTargetDate()))
                 .build();

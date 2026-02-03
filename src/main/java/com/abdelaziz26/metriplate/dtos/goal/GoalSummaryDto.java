@@ -18,5 +18,5 @@ public class GoalSummaryDto {
 
     private Long daysRemaining;
 
-    private Double targetCalories;
+    private String type;
 }
