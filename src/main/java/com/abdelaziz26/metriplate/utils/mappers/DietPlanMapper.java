@@ -1,6 +1,7 @@
 package com.abdelaziz26.metriplate.utils.mappers;
 
 import com.abdelaziz26.metriplate.dtos.plan.DietPlanDTO;
+import com.abdelaziz26.metriplate.dtos.plan.DietPlanSimpleResponseDto;
 import com.abdelaziz26.metriplate.entities.DietPlan;
 import com.abdelaziz26.metriplate.entities.Goal;
 import com.abdelaziz26.metriplate.entities.User;
@@ -45,6 +46,29 @@ public class DietPlanMapper {
         dto.setFatPercentage(entity.getFatPercentage());
         dto.setAiSuccessTips(entity.getAiSuccessTips());
         dto.setWeeks(entity.getWeeklyPlans().stream().map(weeklyPlanMapper::toDto).collect(Collectors.toList()));
+
+        return dto;
+    }
+
+    public DietPlanSimpleResponseDto toSimpleDto(DietPlan entity) {
+        if (entity == null) return null;
+
+        DietPlanSimpleResponseDto dto = new DietPlanSimpleResponseDto();
+        dto.setId(entity.getId());
+        dto.setPlanName(entity.getPlanName());
+        dto.setDescription(entity.getDescription());
+        dto.setStartDate(entity.getStartDate());
+        dto.setEndDate(entity.getEndDate());
+        dto.setDurationInWeeks(entity.getDurationInWeeks());
+        dto.setDietType(entity.getDietType().toString());
+        dto.setMealsPerDay(entity.getMealsPerDay());
+        dto.setIncludeSnacks(entity.getIncludeSnacks());
+        dto.setDailyCalorieTarget(entity.getDailyCalorieTarget());
+        dto.setProteinPercentage(entity.getProteinPercentage());
+        dto.setCarbPercentage(entity.getCarbPercentage());
+        dto.setFatPercentage(entity.getFatPercentage());
+        dto.setAiSuccessTips(entity.getAiSuccessTips());
+        dto.setStatus(entity.getStatus().toString());
 
         return dto;
     }

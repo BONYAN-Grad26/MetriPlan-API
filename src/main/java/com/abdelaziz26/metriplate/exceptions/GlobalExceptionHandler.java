@@ -52,4 +52,10 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage(), ex);
         return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(PlanGenerationException.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handlePlanGenerationException(PlanGenerationException ex) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

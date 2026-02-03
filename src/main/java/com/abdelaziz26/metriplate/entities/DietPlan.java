@@ -43,7 +43,10 @@ public class DietPlan {
     @Enumerated(EnumType.STRING)
     private DietType dietType;
 
+    @Builder.Default
     private Integer mealsPerDay = 3;
+
+    @Builder.Default
     private Boolean includeSnacks = true;
 
     // Nutritional configuration
@@ -58,10 +61,12 @@ public class DietPlan {
     @Column(length = 2000)
     private String aiSuccessTips;
 
+    @Builder.Default
     @OneToMany(mappedBy = "dietPlan", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("weekNumber ASC")
     private List<WeeklyPlan> weeklyPlans = new ArrayList<>();
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     private PlanStatus status = PlanStatus.ACTIVE;
 

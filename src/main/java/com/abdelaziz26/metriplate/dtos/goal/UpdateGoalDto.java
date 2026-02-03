@@ -25,8 +25,6 @@ public class UpdateGoalDto {
     @NotNull
     private Double targetBodyFat;
 
-    @NotNull
-    private Double targetCalories;
 
     private LocalDate startDate;
 

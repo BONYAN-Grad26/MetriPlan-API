@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
@@ -32,21 +34,40 @@ public class JwtFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-        String authHeader = request.getHeader("Authorization");
-
-        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+        boolean white = request.getServletPath().startsWith("/api/auth");
+        if (white) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String token = authHeader.substring(7);
+        log.info("Request path is {}", request.getServletPath());
+        log.info("Request URI is {}", request.getRequestURI());
+
+        String authHeader = request.getHeader("Authorization");
+
+        if(authHeader == null ) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String token = authHeader;
+
+        if(authHeader.startsWith("Bearer ")) {
+            log.info("Token still starts with Bearer in Spring boot 7 o_o ");
+
+            token = authHeader.substring(7);
+        }
 
         if(token.isBlank()) {
+            log.info("TOKEN IS BLANKKKKK!!");
+
             filterChain.doFilter(request, response);
             return;
         }
 
         String email = jwtService.extractUserName(token);
+
+        //log.info("Email is {}", email);
 
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null)
         {
@@ -64,7 +85,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 return;
             }
 
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.get().getAuthorities());
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user.get(), null, user.get().getAuthorities());
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(auth);
 
@@ -73,8 +94,4 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getRequestURI().startsWith("/api/**");
-    }
 }

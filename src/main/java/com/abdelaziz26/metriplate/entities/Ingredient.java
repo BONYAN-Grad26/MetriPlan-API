@@ -45,6 +45,7 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient", cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<MealIngredient> ingredients;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             name = "ingredient_nutrients",

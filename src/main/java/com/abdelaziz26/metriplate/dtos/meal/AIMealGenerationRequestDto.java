@@ -12,6 +12,7 @@ public class AIMealGenerationRequestDto {
     @NotBlank(message = "Meal type is required")
     private String mealType;
 
+    @Builder.Default
     private Integer numberOfMeals = 1;
 
     // Nutritional constraints

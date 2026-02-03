@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -49,7 +50,7 @@ public class AuthController extends _Abdel3zizController {
     }
 
     @PostMapping("/resend-otp")
-    public ResponseEntity<@NotNull Result<String, Error>> resendOtp(@RequestBody HashMap<String, String> emailMap) throws MessagingException {
+    public ResponseEntity<@NotNull Result<String, Error>> resendOtp(@RequestBody Map<String, String> emailMap) throws MessagingException {
         Result<String, Error> result = userService.sendConfirmationOtp(emailMap);
         return new ResponseEntity<>(result, resolveStatus(result));
     }

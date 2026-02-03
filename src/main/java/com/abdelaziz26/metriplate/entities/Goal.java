@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,6 +40,7 @@ public class Goal {
     @Enumerated(EnumType.STRING)
     private ProgressStatus status;
 
+    @Builder.Default
     @OneToMany(mappedBy = "goal")
-    private List<DietPlan> dietPlans;
+    private List<DietPlan> dietPlans = new ArrayList<>();
 }

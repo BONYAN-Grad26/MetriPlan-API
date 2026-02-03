@@ -46,6 +46,7 @@ public class DailyPlan {
 
     // Meals for this day (AI-suggested)
     @OneToMany(mappedBy = "dailyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<DailyPlanMeal> meals = new ArrayList<>();
 
     // Actual consumption (user-tracked)
@@ -70,6 +71,7 @@ public class DailyPlan {
 
     // Status tracking
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private DayStatus status = DayStatus.PLANNED;
 
 }

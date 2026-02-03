@@ -151,6 +151,7 @@
             <artifactId>spring-ai-starter-model-vertex-ai-gemini</artifactId>
         </dependency>
 
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

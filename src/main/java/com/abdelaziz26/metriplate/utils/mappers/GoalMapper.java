@@ -6,7 +6,9 @@ import com.abdelaziz26.metriplate.dtos.goal.ReadGoalDto;
 import com.abdelaziz26.metriplate.dtos.goal.UpdateGoalDto;
 import com.abdelaziz26.metriplate.entities.Goal;
 import com.abdelaziz26.metriplate.entities.User;
+import com.abdelaziz26.metriplate.enums.GoalStatus;
 import com.abdelaziz26.metriplate.enums.GoalType;
+import com.abdelaziz26.metriplate.enums.ProgressStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,6 +27,7 @@ public class GoalMapper {
                 .targetCalories(null)  // logic needed here
                 .targetDate(dto.getTargetDate())
                 .startDate(LocalDate.now())
+                .status(ProgressStatus.NOT_STARTED)
                 .build();
     }
 
@@ -44,9 +47,9 @@ public class GoalMapper {
             goal.setTargetWeight(dto.getTargetWeight());
         }
 
-        if (dto.getTargetCalories() != null) {
-            goal.setTargetCalories(dto.getTargetCalories());
-        }
+        //if (dto.getTargetCalories() != null) {
+        //    goal.setTargetCalories(dto.getTargetCalories());
+        //}
 
         if (dto.getTargetDate() != null) {
             goal.setTargetDate(dto.getTargetDate());

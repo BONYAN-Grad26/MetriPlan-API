@@ -15,6 +15,7 @@ public class MealIngredientDto {
     @Positive(message = "Quantity must be positive")
     private Double quantity; // in grams
 
+    @Builder.Default
     private String measurementUnit = "g";
 
 }

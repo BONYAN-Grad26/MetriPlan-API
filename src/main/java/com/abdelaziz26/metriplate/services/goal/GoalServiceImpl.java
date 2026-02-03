@@ -74,10 +74,10 @@ public class GoalServiceImpl implements GoalService {
             return Result.CreateErrorResult(Errors.NotFoundErr("Goal not found"));
         }
 
-        goalMapper.toEntity(updateGoalDto, goal);
-        goalRepository.save(goal);
+        Goal updatedGoal = goalMapper.toEntity(updateGoalDto, goal);
+        updatedGoal = goalRepository.save(updatedGoal);
 
-        return Result.CreateSuccessResult(goalMapper.toDto(goal));
+        return Result.CreateSuccessResult(goalMapper.toDto(updatedGoal));
     }
 
     @PreAuthorize("@GoalService.isOwner(#id)")

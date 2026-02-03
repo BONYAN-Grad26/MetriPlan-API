@@ -6,11 +6,10 @@ import org.springframework.context.annotation.Profile;
 @Profile("dev")
 public class MagicValues {
 
-    @Value("${BUCKET_CAPACITY}")
-    public static int BUCKET_CAPACITY;
 
-    @Value("{REFILL_RATE}")
-    public static int REFILL_RATE;
+    public static int BUCKET_CAPACITY = 20;
+
+    public static int REFILL_RATE = 5;
 
     public static String RATE_LIMIT_EXCEEDED_MSG = "\"error\" : \"Rate limit exceeded\"";
 

@@ -39,6 +39,7 @@ public class WeeklyPlan {
     private String weeklyStrategy; // AI-generated strategy description
 
     // Daily plans
+    @Builder.Default
     @OneToMany(mappedBy = "weeklyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DailyPlan> dailyPlans = new ArrayList<>();
 

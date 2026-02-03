@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -77,7 +78,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result<String, Error> Register(RegisterDto registerDto) throws MessagingException {
 
-        Role role = roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SecurityException("No such a role Found!"));
+        Role role = roleRepository.findByRole("ROLE_USER").orElseThrow(() -> new SecurityException("No such a role Found!"));
 
         User user = new User();
 
@@ -117,18 +118,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result<String, Error> sendConfirmationOtp(HashMap<String, String> mp) throws MessagingException {
-        Optional<User> user = userRepository.findByEmail(mp.get("email"));
+    public Result<String, Error> sendConfirmationOtp(Map<String, String> mp) throws MessagingException {
+        User user = userRepository.findByEmail(mp.get("email")).orElse(null);
 
-        if (user.isEmpty()) {
+        if (user == null) {
             return Result.CreateErrorResult(Errors.NotFoundErr("User not found"));
         }
 
-        if (user.get().isConfirmed()) {
+        if (user.isConfirmed()) {
             return Result.CreateErrorResult(Errors.BadRequestErr("Email is already confirmed."));
         }
 
-        emailService.sendOtpEmail(user.get().getEmail(), user.get().getFirstName(), user.get().getOtp(), 5);
+        user.setOtp(generateOtp());
+        user.setOtpExpiry(LocalDateTime.now().plusMinutes((long) 5));
+        userRepository.save(user);
+
+        emailService.sendOtpEmail(user.getEmail(), user.getFirstName(), user.getOtp(), 5);
         return Result.CreateSuccessResult("OTP sent successfully");
     }
 
