@@ -2,12 +2,13 @@ package com.abdelaziz26.metriplate.exceptions;
 
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
+import jakarta.mail.MessagingException;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 
@@ -15,10 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<@NotNull Result<Object, Error>> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
         Map<String, String> errors = new HashMap<>();
@@ -32,5 +33,23 @@ public class GlobalExceptionHandler {
 
         Result<Object, Error> result = Result.CreateErrorResult(Errors.ValidationErr(errorsAsString.toString()));
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handleException(Exception ex) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handleNullPointerException(NullPointerException ex) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MessagingException.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handleMessagingException(MessagingException ex) {
+        log.error(ex.getMessage(), ex);
+        return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
