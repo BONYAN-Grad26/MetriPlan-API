@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface MetricsRepository extends JpaRepository<HealthMetrics, Long> {
     Optional<HealthMetrics> findByUser_Id(Long userId);
     boolean existsByIdAndUserId(Long id, Long userId);
+
+    Optional<HealthMetrics> findTopByUserIdOrderByRecordedAtDesc(Long userId);
 }
