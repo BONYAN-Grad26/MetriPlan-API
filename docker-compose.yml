@@ -1,4 +1,23 @@
 services:
+  #game:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile
+  #  container_name: game_container
+  #  ports:
+  #    - '8080:8080'
+  #  depends_on:
+  #    postgres:
+  #      condition: service_healthy
+  ###   - redis
+  #  restart: unless-stopped
+  #  networks:
+  #    - metriplate_net
+  #
+  #  environment:
+  #    - SPRING_PROFILES_ACTIVE=dev
+  #  env_file:
+  #    - .env
   postgres:
     image: postgres
     environment:
