@@ -4,10 +4,12 @@ import com.abdelaziz26.metriplate.dtos.nutrient.CreateNutrientDto;
 import com.abdelaziz26.metriplate.dtos.nutrient.NutrientDto;
 import com.abdelaziz26.metriplate.dtos.nutrient.ReadNutrientDto;
 import com.abdelaziz26.metriplate.dtos.nutrient.UpdateNutrientDTO;
+import com.abdelaziz26.metriplate.enums.NutrientType;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.services.nutrient.NutrientService;
 import com.abdelaziz26.metriplate.utils._Abdel3zizController;
+import com.abdelaziz26.metriplate.utils.annotations.ValidateEnumValue;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +38,9 @@ public class NutrientController extends _Abdel3zizController {
     }
 
     @GetMapping("/type/{type}")
-    public ResponseEntity<@NotNull Result<ReadNutrientDto, Error>> getNutrientByType(@PathVariable String type) {
+    public ResponseEntity<@NotNull Result<ReadNutrientDto, Error>> getNutrientByType(@PathVariable @Valid @ValidateEnumValue(
+            enumClass = NutrientType.class
+    ) String type) {
         Result<ReadNutrientDto, Error> result = nutrientService.getByType(type);
         return new ResponseEntity<>(result, resolveStatus(result));
     }
