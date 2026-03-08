@@ -26,6 +26,16 @@ public class MetricsServiceImpl implements MetricsService {
     private final MetricsMapper metricsMapper;
     private final SecurityContextService securityContextService;
 
+    public boolean isOwner(Long metricsId) {
+        User user = securityContextService.getCurrentUser().orElse(null);
+
+        if(user == null) {
+            return false;
+        }
+
+        return metricsRepository.existsByIdAndUserId(metricsId, user.getId());
+    }
+
     @Override
     @PreAuthorize("@MetricsService.isOwner(#metricsId)")
     public Result<ReadHealthMetricDto, Error> getHealthMetricsById(Long metricsId) {
@@ -103,13 +113,5 @@ public class MetricsServiceImpl implements MetricsService {
     }
 
 
-    public boolean isOwner(Long metricsId) {
-        User user = securityContextService.getCurrentUser().orElse(null);
 
-        if(user == null) {
-            return false;
-        }
-
-        return metricsRepository.existsByIdAndUserId(metricsId, user.getId());
-    }
 }

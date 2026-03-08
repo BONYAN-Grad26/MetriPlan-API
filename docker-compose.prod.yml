@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: game_container
+    container_name: metriplate_container
     ports:
       - '8080:8080'
     networks:
