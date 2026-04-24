@@ -1,15 +1,46 @@
 services:
-  game:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: metriplate_container
-    ports:
-      - '8080:8080'
-    networks:
-      - metriplate_net
+  #game:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile
+  #  container_name: metriplate_container
+  #  ports:
+  #    - '8080:8080'
+  #  networks:
+  #    - metriplate_net
+#
+  #  environment:
+  #    - SPRING_PROFILES_ACTIVE=dev
+  #  env_file:
+  #    - .env
 
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3000:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=dev
-    env_file:
-      - .env
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - open-webui_data:/app/backend/data
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:
+  open-webui_data:
