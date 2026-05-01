@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
 
         emailService.sendOtpEmail(user.getEmail(), user.getFirstName(), user.getOtp(), 5);
 
-        return Result.CreateSuccessResult("User registered successfully");
+        return Result.CreateSuccessResult("User registered successfully - Please Go Check Ur email for Confirmation Code");
     }
 
     @Override

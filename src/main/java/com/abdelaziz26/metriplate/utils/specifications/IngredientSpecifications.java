@@ -10,15 +10,18 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.List;
 
 public class IngredientSpecifications {
-    public static Specification<@NotNull Ingredient> hasDietaryTag(Long tagId) {
+
+    public static Specification<Ingredient> hasDietaryTag(Long tagId) {
         return (root, query, cb) -> {
+            query.distinct(true);
             Join<Ingredient, DietaryTag> tags = root.join("dietaryTags");
             return cb.equal(tags.get("id"), tagId);
         };
     }
 
-    public static Specification<@NotNull Ingredient> hasDietaryTagType(List<DietaryTagType> types) {
+    public static Specification<Ingredient> hasDietaryTagType(List<DietaryTagType> types) {
         return (root, query, cb) -> {
+            query.distinct(true);
             Join<Ingredient, DietaryTag> tags = root.join("dietaryTags");
             return tags.get("type").in(types);
         };

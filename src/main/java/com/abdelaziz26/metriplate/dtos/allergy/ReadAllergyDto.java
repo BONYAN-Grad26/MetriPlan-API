@@ -7,11 +7,12 @@ public class ReadAllergyDto {
 
     private Long id;
 
-    private String type;
-
     private String name;
 
     private String description;
 
-    private String nutrientName;
+    private String type;
+
+
+    private String userEmail;
 }

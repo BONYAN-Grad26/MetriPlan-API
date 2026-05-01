@@ -15,10 +15,10 @@ import java.util.Optional;
 
 public interface IngredientRepository extends JpaRepository<@NotNull Ingredient, @NotNull Long>, JpaSpecificationExecutor<@NotNull Ingredient> {
 
-    @EntityGraph(attributePaths = {"dietaryTags", "nutrients"})
-    @NotNull Optional<Ingredient> findByName(@NotNull String name);
+    @EntityGraph(attributePaths = {"dietaryTags"})
+    @NotNull Optional<Ingredient> findByNameLike(@NotNull String name);
 
-    @EntityGraph(attributePaths = {"dietaryTags", "nutrients"})
+    @EntityGraph(attributePaths = {"dietaryTags"})
     @NotNull Optional<Ingredient> findById(Long id);
 
     Boolean existsByName(@NotNull String name);

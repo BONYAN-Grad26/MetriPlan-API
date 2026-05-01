@@ -1,9 +1,15 @@
 package com.abdelaziz26.metriplate.entities;
 
+import com.abdelaziz26.metriplate.enums.ActivityLevel;
+import com.abdelaziz26.metriplate.enums.DietGoal;
+import com.abdelaziz26.metriplate.enums.DietType;
+import com.abdelaziz26.metriplate.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "health_metrics")
@@ -11,26 +17,61 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class HealthMetrics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    private LocalDate recordedAt;
+    // ── Basic Metrics ──────────────────────────
+    private Integer age;
+    private Double weightKg;
+    private Double heightCm;
 
-    private Double bodyFatPercentage;
-    private Double muscleMass;
+    // Optional body composition fields — provided if user has a smart scale or DEXA scan.
+    // Both are nullable; the system degrades gracefully when absent.
+    private Double muscleMassKg;       // absolute muscle mass in kg
+    private Double fatPercentage;      // body fat as a percentage (e.g. 22.5 means 22.5%)
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;                // MALE, FEMALE, OTHER
+
+    @Enumerated(EnumType.STRING)
+    private ActivityLevel activityLevel;  // SEDENTARY, LIGHTLY_ACTIVE,
+                                          // MODERATELY_ACTIVE, VERY_ACTIVE
+
+    // ── Medical / Conditions ───────────────────
+    private String medicalNotes;          // free-text; anything the user wants to share
+
+    // ── Diet Preferences ──────────────────────
+    @Enumerated(EnumType.STRING)
+    private DietType dietType;            // NONE, VEGETARIAN, VEGAN, KETO,
+                                          // PALEO, MEDITERRANEAN, etc.
+
+    @Enumerated(EnumType.STRING)
+    private DietGoal dietGoal;            // LOSE_WEIGHT, GAIN_MUSCLE,
+                                          // MAINTAIN_WEIGHT, IMPROVE_HEALTH
+
+    // Target the user sets themselves
+    private Double targetWeightKg;
+    private Integer dailyCalorieTarget;   // optional override; else system calculates
+
     private Double bmi;
-    private Double waistCircumference;
-    private Double hipCircumference;
+    private String bmiCategory;
+
+    private Integer tdee;
+
+    // override or calculated
+    private Double fatMass;
+    private Double leanMass;
+
+    private String bodyFatCategory;
 
 
-    @Column(length = 1000)
-    private String notes;
+
+
 }

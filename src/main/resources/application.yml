@@ -22,3 +22,7 @@ spring:
 
 
 
+
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true

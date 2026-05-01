@@ -1,4 +1,4 @@
-package com.abdelaziz26.metriplate.services.HealthMetrics;
+package com.abdelaziz26.metriplate.services.healthMetrics;
 
 import com.abdelaziz26.metriplate.dtos.metrics.CreateHealthMetricDto;
 import com.abdelaziz26.metriplate.dtos.metrics.ReadHealthMetricDto;

@@ -6,10 +6,8 @@ import com.abdelaziz26.metriplate.dtos.ingredients.ReadIngredientDto;
 import com.abdelaziz26.metriplate.dtos.ingredients.UpdateIngredientDto;
 import com.abdelaziz26.metriplate.entities.DietaryTag;
 import com.abdelaziz26.metriplate.entities.Ingredient;
-import com.abdelaziz26.metriplate.entities.Nutrient;
 import com.abdelaziz26.metriplate.enums.DietaryTagType;
 import com.abdelaziz26.metriplate.repositories.IngredientRepository;
-import com.abdelaziz26.metriplate.repositories.NutrientRepository;
 import com.abdelaziz26.metriplate.repositories.TagRepository;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
@@ -35,7 +33,6 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientRepository ingredientRepository;
     private final IngredientMapper ingredientMapper;
     private final TagRepository tagRepository;
-    private final NutrientRepository nutrientRepository;
 
     @Override
     public Result<ReadIngredientDto, Error> getById(long id) {
@@ -49,7 +46,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Result<ReadIngredientDto, Error> getByName(String name) {
-        return ingredientRepository.findByName(name)
+        return ingredientRepository.findByNameLike(name)
                 .map(i ->
                         Result.CreateSuccessResult(ingredientMapper.toDto(i))
                 )
@@ -97,12 +94,11 @@ public class IngredientServiceImpl implements IngredientService {
             return Result.CreateErrorResult(Errors.BadRequestErr("An ingredient already exists with the name " + dto.getName()));
         }
 
-        List<Nutrient> nutrients = nutrientRepository.findAllById(dto.getNutrientIds());
         List<DietaryTag> dietaryTags = tagRepository.findAllById(dto.getDietaryTagIds());
 
         return Result.CreateSuccessResult( ingredientMapper
                 .toDto( ingredientRepository
-                        .save(ingredientMapper.toEntity(dto, nutrients, dietaryTags))
+                        .save(ingredientMapper.toEntity(dto, dietaryTags))
                 )
         );
     }
@@ -140,7 +136,13 @@ public class IngredientServiceImpl implements IngredientService {
             return Result.CreateErrorResult(Errors.BadRequestErr("One or more tags not found"));
         }
 
-        ingredient.getDietaryTags().addAll(tags);
+        tags.forEach(t -> {
+            if (! ingredient.getDietaryTags().contains(t)) {
+                ingredient.getDietaryTags().add(t);
+            }
+        });
+
+        // ingredient.getDietaryTags().addAll(tags);
         ingredientRepository.save(ingredient);
 
         return Result.CreateSuccessResult("Ingredient with id " + ingredientId + " assigned with tags successfully");

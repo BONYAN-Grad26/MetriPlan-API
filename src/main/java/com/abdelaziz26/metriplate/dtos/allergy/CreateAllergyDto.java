@@ -13,13 +13,14 @@ import lombok.*;
 public class CreateAllergyDto {
 
     @NotBlank
-    private String type;
-
-    @NotNull
-    private Long nutrientId;
-
-    @ValidateEnumValue(enumClass = AllergenType.class)
     private String name;
 
     private String description;
+
+    @ValidateEnumValue(enumClass = AllergenType.class)
+    @NotBlank
+    private String type;
+
+    @NotNull
+    private Long userId;
 }

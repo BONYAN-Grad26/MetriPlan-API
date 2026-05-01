@@ -20,11 +20,11 @@ public class Result<T, E extends Error> {
 
     public static <T, E extends Error> Result<T, E> CreateSuccessResult(T data)
     {
-        return new Result<>(data, (E) Errors.None(), true);
+        return new Result<T, E>(data,  (E) Errors.None(), true);
     }
 
-    public static <T, E extends Error> Result<T, E> CreateErrorResult(Error error)
+    public static <T, E extends Error> Result<T, E> CreateErrorResult(E error)
     {
-        return new Result<>(null, (E) error, false);
+        return new Result<>(null, error, false);
     }
 }

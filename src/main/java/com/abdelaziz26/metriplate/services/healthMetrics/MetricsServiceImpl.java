@@ -1,30 +1,35 @@
-package com.abdelaziz26.metriplate.services.HealthMetrics;
+package com.abdelaziz26.metriplate.services.healthMetrics;
 
 import com.abdelaziz26.metriplate.dtos.metrics.CreateHealthMetricDto;
+import com.abdelaziz26.metriplate.dtos.metrics.NutritionCalcResult;
 import com.abdelaziz26.metriplate.dtos.metrics.ReadHealthMetricDto;
 import com.abdelaziz26.metriplate.dtos.metrics.UpdateHealthMetricDto;
 import com.abdelaziz26.metriplate.entities.HealthMetrics;
 import com.abdelaziz26.metriplate.entities.User;
+import com.abdelaziz26.metriplate.enums.AllergenType;
+import com.abdelaziz26.metriplate.repositories.AllergyRepository;
 import com.abdelaziz26.metriplate.repositories.MetricsRepository;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.security.SecurityContextService;
+import com.abdelaziz26.metriplate.utils.NutritionCalculator;
 import com.abdelaziz26.metriplate.utils.mappers.MetricsMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service("MetricsService")
 @RequiredArgsConstructor
 public class MetricsServiceImpl implements MetricsService {
 
-    private final MetricsRepository metricsRepository;
-    private final MetricsMapper metricsMapper;
-    private final SecurityContextService securityContextService;
+    private final MetricsRepository        metricsRepository;
+    private final MetricsMapper            metricsMapper;
+    private final SecurityContextService   securityContextService;
 
     public boolean isOwner(Long metricsId) {
         User user = securityContextService.getCurrentUser().orElse(null);
@@ -41,7 +46,7 @@ public class MetricsServiceImpl implements MetricsService {
     public Result<ReadHealthMetricDto, Error> getHealthMetricsById(Long metricsId) {
 
         return metricsRepository.findById(metricsId).map(m ->
-                Result.CreateSuccessResult( metricsMapper.toDto(m) ) )
+                Result.CreateSuccessResult( metricsMapper.toReadDto(m) ) )
                 .orElseGet( () ->
                         Result.CreateErrorResult( Errors.NotFoundErr("No HealthMetric Associated to this Id")
                         )
@@ -58,7 +63,7 @@ public class MetricsServiceImpl implements MetricsService {
         }
 
         return metricsRepository.findByUser_Id(user.getId()).map(m ->
-                Result.CreateSuccessResult( metricsMapper.toDto(m) ) )
+                Result.CreateSuccessResult( metricsMapper.toReadDto(m) ) )
                 .orElseGet( () ->
                         Result.CreateErrorResult( Errors.NotFoundErr("No HealthMetric Associated to this Id")
                         )
@@ -66,19 +71,28 @@ public class MetricsServiceImpl implements MetricsService {
     }
 
     @Override
-    public Result<ReadHealthMetricDto, Error> addHealthMetrics(CreateHealthMetricDto createHealthMetricDto) {
+    public Result<ReadHealthMetricDto, Error> addHealthMetrics(CreateHealthMetricDto dto) {
         Optional<User> user = securityContextService.getCurrentUser();
 
         if(user.isEmpty()) {
             return Result.CreateErrorResult(Errors.UnauthorizedErr("You are not authorized!"));
         }
 
-        HealthMetrics healthMetrics = metricsMapper.toEntity(createHealthMetricDto);
+        NutritionCalcResult calcResult = NutritionCalculator.calculateAll(
+                dto.getWeightKg(),
+                dto.getHeightCm(),
+                dto.getAge(),
+                dto.getGender(),
+                dto.getActivityLevel(),
+                dto.getDietGoal(),
+                dto.getFatPercentage());
+
+        HealthMetrics healthMetrics = metricsMapper.toEntity(dto, calcResult);
         healthMetrics.setUser(user.get());
 
         HealthMetrics savedMetrics = metricsRepository.save(healthMetrics);
 
-        ReadHealthMetricDto readHealthMetricDto = metricsMapper.toDto(savedMetrics);
+        ReadHealthMetricDto readHealthMetricDto = metricsMapper.toReadDto(savedMetrics);
 
         return Result.CreateSuccessResult(readHealthMetricDto);
     }
@@ -86,7 +100,7 @@ public class MetricsServiceImpl implements MetricsService {
     @Transactional
     @PreAuthorize("@MetricsService.isOwner(#metricId)")
     @Override
-    public Result<ReadHealthMetricDto, Error> updateHealthMetrics(Long metricId, UpdateHealthMetricDto updateHealthMetricDto) {
+    public Result<ReadHealthMetricDto, Error> updateHealthMetrics(Long metricId, UpdateHealthMetricDto dto) {
 
         Optional<HealthMetrics> metrics = metricsRepository.findById(metricId);
 
@@ -96,11 +110,20 @@ public class MetricsServiceImpl implements MetricsService {
 
         HealthMetrics healthMetrics = metrics.get();
 
-        healthMetrics = metricsMapper.toEntity(updateHealthMetricDto, healthMetrics);
+        NutritionCalcResult calcResult = NutritionCalculator.calculateAll(
+                dto.getWeightKg(),
+                dto.getHeightCm(),
+                dto.getAge(),
+                dto.getGender(),
+                dto.getActivityLevel(),
+                dto.getDietGoal(),
+                dto.getFatPercentage());
+
+        healthMetrics = metricsMapper.toEntity(dto, healthMetrics, calcResult);
 
         HealthMetrics updatedMetrics = metricsRepository.save(healthMetrics);
 
-        ReadHealthMetricDto readHealthMetricDto = metricsMapper.toDto(updatedMetrics);
+        ReadHealthMetricDto readHealthMetricDto = metricsMapper.toReadDto(updatedMetrics);
 
         return Result.CreateSuccessResult(readHealthMetricDto);
     }
@@ -111,7 +134,5 @@ public class MetricsServiceImpl implements MetricsService {
         metricsRepository.deleteById(metricsId);
         return Result.CreateSuccessResult("HealthMetrics deleted successfully");
     }
-
-
 
 }

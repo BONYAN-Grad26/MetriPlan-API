@@ -5,7 +5,7 @@ import com.abdelaziz26.metriplate.dtos.metrics.ReadHealthMetricDto;
 import com.abdelaziz26.metriplate.dtos.metrics.UpdateHealthMetricDto;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
-import com.abdelaziz26.metriplate.services.HealthMetrics.MetricsService;
+import com.abdelaziz26.metriplate.services.healthMetrics.MetricsService;
 import com.abdelaziz26.metriplate.utils._Abdel3zizController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

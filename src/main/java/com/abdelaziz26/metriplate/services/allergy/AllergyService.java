@@ -11,7 +11,6 @@ import java.util.List;
 public interface AllergyService {
     Result<ReadAllergyDto, Error> getById(Long id);
     Result<List<ReadAllergyDto>, Error> getByUserId(Long userId);
-    Result<List<ReadAllergyDto>, Error> getByNutrientId(Long nutrientId);
 
     Result<ReadAllergyDto, Error> addAllergy(CreateAllergyDto dto);
     Result<ReadAllergyDto, Error> updateAllergy(Long id, UpdateAllergyDto dto);

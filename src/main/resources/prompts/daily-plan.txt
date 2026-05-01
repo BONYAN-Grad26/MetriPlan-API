@@ -4,7 +4,7 @@ Generate a DAILY diet plan for one day.
 
 Rules:
 - Respect weekly targets
-- Balance nutrients
+- Balance macronutrients
 - Return JSON ONLY
 
 Week Strategy:

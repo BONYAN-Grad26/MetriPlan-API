@@ -6,7 +6,6 @@ import com.abdelaziz26.metriplate.dtos.allergy.UpdateAllergyDto;
 import com.abdelaziz26.metriplate.entities.Allergy;
 import com.abdelaziz26.metriplate.entities.User;
 import com.abdelaziz26.metriplate.repositories.AllergyRepository;
-import com.abdelaziz26.metriplate.repositories.NutrientRepository;
 import com.abdelaziz26.metriplate.repositories.UserRepository;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
@@ -26,7 +25,6 @@ public class AllergyServiceImpl implements AllergyService {
 
     private final AllergyRepository allergyRepository;
     private final AllergyMapper allergyMapper;
-    private final NutrientRepository nutrientRepository;
     private final SecurityContextService securityContextService;
 
     @Override
@@ -50,39 +48,17 @@ public class AllergyServiceImpl implements AllergyService {
         );
     }
 
-    @Override
-    public Result<List<ReadAllergyDto>, Error> getByNutrientId(Long nutrientId) {
-        return Result.CreateSuccessResult(
-                allergyRepository.findByNutrient_Id(nutrientId)
-                        .stream()
-                        .map(allergyMapper::toDto)
-                        .toList()
-        );
-    }
-
     @Transactional
     @Override
     public Result<ReadAllergyDto, Error> addAllergy(CreateAllergyDto dto) {
         User user = securityContextService.getCurrentUser().orElse(null);
-        var nutrient = nutrientRepository.findById(dto.getNutrientId()).orElse(null);
 
         if (user == null)
             return Result.CreateErrorResult(
                     Errors.NotFoundErr("User Not Found")
             );
 
-        if (nutrient == null)
-            return Result.CreateErrorResult(
-                    Errors.NotFoundErr("Nutrient Not Found")
-            );
-
-        if (allergyRepository.existsByUser_IdAndNutrient_Id(user.getId(), nutrient.getId())) {
-            return Result.CreateErrorResult(
-                    Errors.BadRequestErr("Allergy for this nutrient already exists.")
-            );
-        }
-
-        Allergy allergy = allergyMapper.toEntity(dto, nutrient, user);
+        Allergy allergy = allergyMapper.toEntity(dto, user);
 
         return Result.CreateSuccessResult(
                 allergyMapper.toDto(allergyRepository.save(allergy))

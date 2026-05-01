@@ -12,15 +12,16 @@ import lombok.*;
 @AllArgsConstructor
 public class UpdateAllergyDto {
 
-    @ValidateEnumValue(enumClass = AllergenType.class)
-    @NotBlank
-    private String type;
-
-    @NotNull
-    private Long nutrientId;
-
     @NotBlank
     private String name;
 
     private String description;
+
+    @ValidateEnumValue(enumClass = AllergenType.class)
+    @NotBlank
+    private String type;
+
+
+    @NotNull
+    private Long userId;
 }

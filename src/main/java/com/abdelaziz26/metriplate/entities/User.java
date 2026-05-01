@@ -14,7 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users",
@@ -50,21 +52,22 @@ public class User implements UserDetails {
 
     private boolean confirmed = false;
 
+
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Allergy> allergens = new HashSet<>();
+
     @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<Goal> goals;
 
-    @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
-    private List<HealthMetrics> healthMetrics;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private HealthMetrics healthMetrics;
 
     @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<DietPlan> dietPlans;
-
-    @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
-    private List<Allergy> allergies;
 
     @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<RefreshToken> refreshTokens;

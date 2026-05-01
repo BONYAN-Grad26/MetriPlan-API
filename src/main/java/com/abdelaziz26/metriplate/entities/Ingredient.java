@@ -5,8 +5,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity @Table(name = "ingredients", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"name"})
@@ -15,47 +19,48 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor @AllArgsConstructor
-@Builder
 public class Ingredient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String name;
+    @Column(nullable = false)
+    private String name;                   // "Oats", "Chicken Breast", "Almond Milk"
 
-    private String description;
+    private String imageUrl;
 
     @Enumerated(EnumType.STRING)
-    private IngredientCategory category;
+    @Column(nullable = false)
+    private IngredientCategory category;   // Dairy, Grains, Protein, Vegetables …
 
-    // Per 100g measurements
+    // ── Nutritional Info (per 100 g / ml) ─────
     private Double calories;
+    private Double proteinG;               // renamed from proteinG to proteinG for consistency
+    private Double carbsG;                 // renamed from carbsG to carbsG for consistency
+    private Double fatG;                   // renamed from fatG to fatG for consistency
+    private Double fiberG;                 // renamed from fiberG to fiberG for consistency
+    private Double sugarG;                 // added sugar field
 
-    private Double protein; // in grams
 
-    private Double carbohydrates;
+    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Allergy> allergens = new ArrayList<>() {
+    };
 
-    private Double fat;
+    // ── E-commerce fields ─────────────────────
+    @Column(nullable = false)
+    private BigDecimal price;
 
-    private Double fiber;
+    private String unit;                   // "kg", "g", "piece", "liter"
+    private Integer stockQuantity;
 
-    private Double sugar;
+    private boolean availableForSale;      // admin toggle
+
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "ingredient", cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<MealIngredient> ingredients;
 
-    @Builder.Default
-    @ManyToMany
-    @JoinTable(
-            name = "ingredient_nutrients",
-            joinColumns = @JoinColumn(name = "ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name = "nutrient_id")
-    )
-    private List<Nutrient> nutrients = new ArrayList<>();;
 
-    @Builder.Default    //   --------->   مهمه جدا
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "ingredient_dietary_tags",
             joinColumns = @JoinColumn(name = "ingredient_id"),

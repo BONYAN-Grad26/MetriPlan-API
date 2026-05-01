@@ -24,7 +24,7 @@ Use ONLY the values above.
 GENERAL RULES
 --------------------
 - Use ONLY the provided ingredients (match by exact name)
-- Avoid ALL ingredients that share a nutrient the user is allergic to
+- Avoid ALL ingredients that contain allergens the user is allergic to
 - Match the user's active goal
 - Respect the diet type implied by the user's dietary tags
 - Balance macronutrients according to the target percentages
@@ -65,7 +65,7 @@ Waist Circumference (cm): {waistCircumference}
 Hip  Circumference (cm) : {hipCircumference}
 
 --------------------
-ALLERGIES  (do NOT use any ingredient linked to these nutrients)
+ALLERGIES  (do NOT use any ingredient linked to these allergens)
 --------------------
 {allergyList}
 
