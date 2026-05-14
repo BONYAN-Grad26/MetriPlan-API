@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.repositories;
 
-import com.abdelaziz26.metriplate.entities.HealthMetrics;
+import com.abdelaziz26.metriplate.entities.user.HealthMetrics;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

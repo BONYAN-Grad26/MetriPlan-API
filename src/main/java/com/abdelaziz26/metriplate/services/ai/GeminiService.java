@@ -4,9 +4,9 @@
 //import com.abdelaziz26.metriplate.dtos.plan.DietPlanDTO;
 //import com.abdelaziz26.metriplate.dtos.plan.MealDTO;
 //import com.abdelaziz26.metriplate.dtos.plan.WeekDTO;
-//import com.abdelaziz26.metriplate.entities.DietPlan;
-//import com.abdelaziz26.metriplate.entities.Goal;
-//import com.abdelaziz26.metriplate.entities.User;
+//import com.abdelaziz26.metriplate.entities.diet.DietPlan;
+//import com.abdelaziz26.metriplate.entities.user.Goal;
+//import com.abdelaziz26.metriplate.entities.user.User;
 //import com.abdelaziz26.metriplate.exceptions.PlanGenerationException;
 //import com.abdelaziz26.metriplate.repositories.GoalRepository;
 //import com.abdelaziz26.metriplate.repositories.UserRepository;

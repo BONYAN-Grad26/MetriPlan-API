@@ -3,7 +3,7 @@ package com.abdelaziz26.metriplate.repositories;
 import com.abdelaziz26.metriplate.enums.ProgressStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.abdelaziz26.metriplate.entities.Goal;
+import com.abdelaziz26.metriplate.entities.user.Goal;
 
 import java.util.List;
 import java.util.Optional;

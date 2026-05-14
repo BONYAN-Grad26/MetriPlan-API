@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.repositories;
 
-import com.abdelaziz26.metriplate.entities.Meal;
+import com.abdelaziz26.metriplate.entities.diet.Meal;
 import com.abdelaziz26.metriplate.enums.MealType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

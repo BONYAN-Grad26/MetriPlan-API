@@ -1,9 +1,9 @@
 //package com.abdelaziz26.metriplate.utils.ai;
 //
-//import com.abdelaziz26.metriplate.entities.Allergy;
-//import com.abdelaziz26.metriplate.entities.Goal;
-//import com.abdelaziz26.metriplate.entities.HealthMetrics;
-//import com.abdelaziz26.metriplate.entities.Ingredient;
+//import com.abdelaziz26.metriplate.entities.user.Allergy;
+//import com.abdelaziz26.metriplate.entities.user.Goal;
+//import com.abdelaziz26.metriplate.entities.user.HealthMetrics;
+//import com.abdelaziz26.metriplate.entities.diet.Ingredient;
 //import com.abdelaziz26.metriplate.enums.ProgressStatus;
 //import com.abdelaziz26.metriplate.enums.AllergenType;
 //import com.abdelaziz26.metriplate.exceptions.PlanGenerationException;

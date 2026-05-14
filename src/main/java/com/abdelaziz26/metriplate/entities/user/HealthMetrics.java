@@ -1,4 +1,4 @@
-package com.abdelaziz26.metriplate.entities;
+package com.abdelaziz26.metriplate.entities.user;
 
 import com.abdelaziz26.metriplate.enums.ActivityLevel;
 import com.abdelaziz26.metriplate.enums.DietGoal;
@@ -6,10 +6,6 @@ import com.abdelaziz26.metriplate.enums.DietType;
 import com.abdelaziz26.metriplate.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "health_metrics")

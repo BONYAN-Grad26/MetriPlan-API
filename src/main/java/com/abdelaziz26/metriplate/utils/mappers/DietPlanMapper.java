@@ -2,9 +2,9 @@ package com.abdelaziz26.metriplate.utils.mappers;
 
 import com.abdelaziz26.metriplate.dtos.plan.DietPlanDTO;
 import com.abdelaziz26.metriplate.dtos.plan.DietPlanSimpleResponseDto;
-import com.abdelaziz26.metriplate.entities.DietPlan;
-import com.abdelaziz26.metriplate.entities.Goal;
-import com.abdelaziz26.metriplate.entities.User;
+import com.abdelaziz26.metriplate.entities.diet.DietPlan;
+import com.abdelaziz26.metriplate.entities.user.Goal;
+import com.abdelaziz26.metriplate.entities.user.User;
 import com.abdelaziz26.metriplate.enums.PlanStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

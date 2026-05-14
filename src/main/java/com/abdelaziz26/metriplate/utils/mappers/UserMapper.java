@@ -1,8 +1,7 @@
 package com.abdelaziz26.metriplate.utils.mappers;
 
 import com.abdelaziz26.metriplate.dtos.user.RegisterDto;
-import com.abdelaziz26.metriplate.entities.User;
-import lombok.RequiredArgsConstructor;
+import com.abdelaziz26.metriplate.entities.user.User;
 import org.springframework.stereotype.Service;
 
 @Service

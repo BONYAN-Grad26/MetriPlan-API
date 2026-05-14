@@ -1,11 +1,9 @@
-package com.abdelaziz26.metriplate.entities;
+package com.abdelaziz26.metriplate.entities.user;
 
+import com.abdelaziz26.metriplate.entities.diet.Ingredient;
 import com.abdelaziz26.metriplate.enums.AllergenType;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity @Table(name = "allergies")
 @Getter

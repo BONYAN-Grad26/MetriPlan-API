@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.repositories;
 
-import com.abdelaziz26.metriplate.entities.User;
+import com.abdelaziz26.metriplate.entities.user.User;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 

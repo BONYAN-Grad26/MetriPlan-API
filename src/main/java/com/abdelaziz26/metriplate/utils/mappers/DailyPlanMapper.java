@@ -3,10 +3,10 @@ package com.abdelaziz26.metriplate.utils.mappers;
 import com.abdelaziz26.metriplate.dtos.plan.DayDTO;
 import com.abdelaziz26.metriplate.dtos.plan.IngredientDTO;
 import com.abdelaziz26.metriplate.dtos.plan.MealDTO;
-import com.abdelaziz26.metriplate.entities.DailyPlan;
-import com.abdelaziz26.metriplate.entities.DailyPlanMeal;
-import com.abdelaziz26.metriplate.entities.MealIngredient;
-import com.abdelaziz26.metriplate.entities.WeeklyPlan;
+import com.abdelaziz26.metriplate.entities.diet.DailyPlan;
+import com.abdelaziz26.metriplate.entities.diet.DailyPlanMeal;
+import com.abdelaziz26.metriplate.entities.diet.MealIngredient;
+import com.abdelaziz26.metriplate.entities.diet.WeeklyPlan;
 import com.abdelaziz26.metriplate.enums.DayStatus;
 import org.springframework.stereotype.Component;
 

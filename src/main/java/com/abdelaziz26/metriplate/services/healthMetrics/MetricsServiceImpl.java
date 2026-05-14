@@ -4,10 +4,8 @@ import com.abdelaziz26.metriplate.dtos.metrics.CreateHealthMetricDto;
 import com.abdelaziz26.metriplate.dtos.metrics.NutritionCalcResult;
 import com.abdelaziz26.metriplate.dtos.metrics.ReadHealthMetricDto;
 import com.abdelaziz26.metriplate.dtos.metrics.UpdateHealthMetricDto;
-import com.abdelaziz26.metriplate.entities.HealthMetrics;
-import com.abdelaziz26.metriplate.entities.User;
-import com.abdelaziz26.metriplate.enums.AllergenType;
-import com.abdelaziz26.metriplate.repositories.AllergyRepository;
+import com.abdelaziz26.metriplate.entities.user.HealthMetrics;
+import com.abdelaziz26.metriplate.entities.user.User;
 import com.abdelaziz26.metriplate.repositories.MetricsRepository;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
@@ -20,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service("MetricsService")

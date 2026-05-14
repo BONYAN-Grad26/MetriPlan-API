@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.repositories;
 
-import com.abdelaziz26.metriplate.entities.DailyPlanMeal;
+import com.abdelaziz26.metriplate.entities.diet.DailyPlanMeal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

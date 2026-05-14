@@ -1,12 +1,9 @@
 package com.abdelaziz26.metriplate.services.token;
 
-import com.abdelaziz26.metriplate.entities.RefreshToken;
-import com.abdelaziz26.metriplate.entities.User;
+import com.abdelaziz26.metriplate.entities.user.RefreshToken;
+import com.abdelaziz26.metriplate.entities.user.User;
 import com.abdelaziz26.metriplate.repositories.RefreshTokenRepository;
 import com.abdelaziz26.metriplate.repositories.UserRepository;
-import com.abdelaziz26.metriplate.responses.Result_.Error;
-import com.abdelaziz26.metriplate.responses.Result_.Errors;
-import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.responses.TokenResponse;
 import com.abdelaziz26.metriplate.security.JwtService;
 import lombok.RequiredArgsConstructor;

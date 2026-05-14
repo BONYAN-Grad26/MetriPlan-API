@@ -4,15 +4,13 @@ import com.abdelaziz26.metriplate.dtos.ingredients.CreateIngredientDto;
 import com.abdelaziz26.metriplate.dtos.ingredients.IngredientDto;
 import com.abdelaziz26.metriplate.dtos.ingredients.ReadIngredientDto;
 import com.abdelaziz26.metriplate.dtos.ingredients.UpdateIngredientDto;
-import com.abdelaziz26.metriplate.entities.Allergy;
-import com.abdelaziz26.metriplate.entities.DietaryTag;
-import com.abdelaziz26.metriplate.entities.Ingredient;
+import com.abdelaziz26.metriplate.entities.diet.DietaryTag;
+import com.abdelaziz26.metriplate.entities.diet.Ingredient;
 import com.abdelaziz26.metriplate.enums.IngredientCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 

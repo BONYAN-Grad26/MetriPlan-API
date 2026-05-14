@@ -1,8 +1,8 @@
 package com.abdelaziz26.metriplate.utils.mappers;
 
 import com.abdelaziz26.metriplate.dtos.plan.WeekDTO;
-import com.abdelaziz26.metriplate.entities.DietPlan;
-import com.abdelaziz26.metriplate.entities.WeeklyPlan;
+import com.abdelaziz26.metriplate.entities.diet.DietPlan;
+import com.abdelaziz26.metriplate.entities.diet.WeeklyPlan;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

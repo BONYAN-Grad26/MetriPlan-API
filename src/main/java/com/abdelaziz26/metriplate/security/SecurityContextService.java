@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.security;
 
-import com.abdelaziz26.metriplate.entities.User;
+import com.abdelaziz26.metriplate.entities.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

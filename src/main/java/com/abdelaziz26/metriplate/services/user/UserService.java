@@ -4,16 +4,13 @@ import com.abdelaziz26.metriplate.dtos.user.AuthResponse;
 import com.abdelaziz26.metriplate.dtos.user.ConfirmEmailDto;
 import com.abdelaziz26.metriplate.dtos.user.LoginDto;
 import com.abdelaziz26.metriplate.dtos.user.RegisterDto;
-import com.abdelaziz26.metriplate.entities.RefreshToken;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
-import com.abdelaziz26.metriplate.responses.TokenResponse;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public interface UserService {

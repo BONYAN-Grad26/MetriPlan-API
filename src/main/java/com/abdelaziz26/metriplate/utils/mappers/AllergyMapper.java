@@ -3,8 +3,8 @@ package com.abdelaziz26.metriplate.utils.mappers;
 import com.abdelaziz26.metriplate.dtos.allergy.CreateAllergyDto;
 import com.abdelaziz26.metriplate.dtos.allergy.ReadAllergyDto;
 import com.abdelaziz26.metriplate.dtos.allergy.UpdateAllergyDto;
-import com.abdelaziz26.metriplate.entities.Allergy;
-import com.abdelaziz26.metriplate.entities.User;
+import com.abdelaziz26.metriplate.entities.user.Allergy;
+import com.abdelaziz26.metriplate.entities.user.User;
 import com.abdelaziz26.metriplate.enums.AllergenType;
 import org.springframework.stereotype.Service;
 

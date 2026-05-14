@@ -1,5 +1,6 @@
-package com.abdelaziz26.metriplate.entities;
+package com.abdelaziz26.metriplate.entities.user;
 
+import com.abdelaziz26.metriplate.entities.diet.DietPlan;
 import com.abdelaziz26.metriplate.enums.GoalType;
 import com.abdelaziz26.metriplate.enums.ProgressStatus;
 import jakarta.persistence.*;

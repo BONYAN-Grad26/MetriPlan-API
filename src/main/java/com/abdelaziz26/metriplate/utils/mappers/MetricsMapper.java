@@ -4,7 +4,7 @@ import com.abdelaziz26.metriplate.dtos.metrics.CreateHealthMetricDto;
 import com.abdelaziz26.metriplate.dtos.metrics.NutritionCalcResult;
 import com.abdelaziz26.metriplate.dtos.metrics.ReadHealthMetricDto;
 import com.abdelaziz26.metriplate.dtos.metrics.UpdateHealthMetricDto;
-import com.abdelaziz26.metriplate.entities.HealthMetrics;
+import com.abdelaziz26.metriplate.entities.user.HealthMetrics;
 import org.springframework.stereotype.Service;
 
 @Service

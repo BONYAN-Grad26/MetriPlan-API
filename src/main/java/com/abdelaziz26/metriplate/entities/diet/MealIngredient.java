@@ -1,4 +1,4 @@
-package com.abdelaziz26.metriplate.entities;
+package com.abdelaziz26.metriplate.entities.diet;
 
 import jakarta.persistence.*;
 import lombok.*;

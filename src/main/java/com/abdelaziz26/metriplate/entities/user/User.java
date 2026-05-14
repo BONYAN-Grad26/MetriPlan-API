@@ -1,5 +1,6 @@
-package com.abdelaziz26.metriplate.entities;
+package com.abdelaziz26.metriplate.entities.user;
 
+import com.abdelaziz26.metriplate.entities.diet.DietPlan;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

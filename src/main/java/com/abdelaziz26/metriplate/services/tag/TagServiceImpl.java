@@ -4,7 +4,7 @@ import com.abdelaziz26.metriplate.dtos.tag.CreateDietaryTagDto;
 import com.abdelaziz26.metriplate.dtos.tag.DietaryTagDto;
 import com.abdelaziz26.metriplate.dtos.tag.ReadDietaryTagDto;
 import com.abdelaziz26.metriplate.dtos.tag.UpdateDietaryTagDto;
-import com.abdelaziz26.metriplate.entities.DietaryTag;
+import com.abdelaziz26.metriplate.entities.diet.DietaryTag;
 import com.abdelaziz26.metriplate.repositories.TagRepository;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;

@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.repositories;
 
-import com.abdelaziz26.metriplate.entities.DailyPlan;
+import com.abdelaziz26.metriplate.entities.diet.DailyPlan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

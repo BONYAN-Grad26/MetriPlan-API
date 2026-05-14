@@ -1,16 +1,14 @@
-package com.abdelaziz26.metriplate.entities;
+package com.abdelaziz26.metriplate.entities.diet;
 
+import com.abdelaziz26.metriplate.entities.user.Allergy;
 import com.abdelaziz26.metriplate.enums.IngredientCategory;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity @Table(name = "ingredients", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"name"})
