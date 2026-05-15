@@ -8,6 +8,7 @@ import com.abdelaziz26.metriplate.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -34,9 +35,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.requestMatchers("/api/**").permitAll()
+        http.authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/api/auth/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/ingredients/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/tags/**").permitAll()
+                                .requestMatchers("/api/tags/**").hasRole("ADMIN")
+
+                                .requestMatchers("/api/diet-plan/**", "/workout-plan/**", "/api/allergy/**").authenticated()
+
                 ).csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(AbstractHttpConfigurer::disable)
                 .exceptionHandling(ehc ->

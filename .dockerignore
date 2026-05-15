@@ -13,4 +13,3 @@ HELP.md
 .gitattributes
 docker-compose.dev.yml
 docker-compose.yml
-.env

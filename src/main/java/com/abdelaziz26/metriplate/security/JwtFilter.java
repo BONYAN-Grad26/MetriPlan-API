@@ -31,7 +31,13 @@ public class JwtFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-        boolean white = request.getServletPath().startsWith("/api/auth");
+        boolean white = request.getServletPath().startsWith("/api/auth")
+                || request.getServletPath().startsWith("/v3/api-docs")
+                || request.getServletPath().startsWith("/swagger-ui")
+                || request.getServletPath().startsWith("/swagger-ui.html")
+                || (request.getMethod().equals("GET") && request.getServletPath().startsWith("/api/ingredients"))
+                || (request.getMethod().equals("GET") && request.getServletPath().startsWith("/api/tags"));
+
         if (white) {
             filterChain.doFilter(request, response);
             return;
@@ -49,14 +55,10 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = authHeader;
 
         if(authHeader.startsWith("Bearer ")) {
-            log.info("Token still starts with Bearer in Spring boot 7 o_o ");
-
             token = authHeader.substring(7);
         }
 
         if(token.isBlank()) {
-            log.info("TOKEN IS BLANKKKKK!!");
-
             filterChain.doFilter(request, response);
             return;
         }

@@ -1,4 +1,22 @@
 services:
+  metriplate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: metriplate_container
+    ports:
+      - '8080:8080'
+    networks:
+      - metriplate_net
+
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   postgres:
     image: postgres
     environment:
