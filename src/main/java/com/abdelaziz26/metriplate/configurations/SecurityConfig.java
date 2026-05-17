@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/api/tags/**").permitAll()
                                 .requestMatchers("/api/tags/**").hasRole("ADMIN")
 
-                                .requestMatchers("/api/diet-plan/**", "/workout-plan/**", "/api/allergy/**").authenticated()
+                                .requestMatchers("/api/diet-plan/**", "/workout-plan/**", "/api/allergy/**", "/api/health-profile/**").authenticated()
 
                 ).csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(AbstractHttpConfigurer::disable)
