@@ -43,9 +43,9 @@ public class WeeklyPlan {
     @OneToMany(mappedBy = "weeklyPlan", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DailyPlan> dailyPlans = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(nullable = false, name = "diet_plan_id")
-    private DietPlan dietPlan;
+    //@ManyToOne
+    //@JoinColumn(name = "diet_plan_id")
+    //private DietPlan dietPlan;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

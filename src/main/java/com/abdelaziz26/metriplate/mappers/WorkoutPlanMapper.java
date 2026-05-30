@@ -10,6 +10,9 @@ import com.abdelaziz26.metriplate.entities.workout.WorkoutPlan;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 @Component
 public class WorkoutPlanMapper {
@@ -55,5 +58,46 @@ public class WorkoutPlanMapper {
         ex.setNotes(dto.getNotes());
         ex.setDay(day);
         return ex;
+    }
+
+    public WorkoutPlanResponseDto toDto(WorkoutPlan workoutPlan) {
+        if (workoutPlan == null) return null;
+
+        Map<String, WorkoutDayDto> schedule = (workoutPlan.getDays() == null) ?
+                new LinkedHashMap<>() :
+                workoutPlan.getDays()
+                        .stream()
+                        .collect(Collectors.toMap(
+                                WorkoutDay::getDayName,
+                                day -> {
+                                    List<ExerciseDto> exercises = (day.getExercises() == null) ?
+                                            List.of() :
+                                            day.getExercises()
+                                                    .stream()
+                                                    .map(e -> ExerciseDto.builder()
+                                                            .name(e.getName())
+                                                            .sets(e.getSets() == null ? 0 : e.getSets())
+                                                            .reps(e.getReps())
+                                                            .rest_seconds(e.getRestSeconds() == null ? 0 : e.getRestSeconds())
+                                                            .notes(e.getNotes())
+                                                            .build())
+                                                    .collect(Collectors.toList());
+
+                                    return WorkoutDayDto.builder()
+                                            .session(day.getSession())
+                                            .focus(day.getFocus())
+                                            .exercises(exercises)
+                                            .build();
+                                },
+                                (a, b) -> a,
+                                LinkedHashMap::new
+                        ));
+
+        WorkoutPlanResponseDto dto = new WorkoutPlanResponseDto();
+        dto.setPlan_name(workoutPlan.getPlanName());
+        dto.setSplit_type(workoutPlan.getSplitType());
+        dto.setSplit_reasoning(workoutPlan.getSplitReasoning());
+        dto.setWeekly_schedule(schedule);
+        return dto;
     }
 }

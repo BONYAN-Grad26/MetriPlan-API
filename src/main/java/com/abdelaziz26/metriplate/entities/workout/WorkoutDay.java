@@ -27,7 +27,7 @@ public class WorkoutDay {
     @JoinColumn(name = "plan_id")
     private WorkoutPlan plan;
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> exercises;
 
 }

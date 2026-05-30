@@ -1,15 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/metriplate
-
-  ai:
-    google:
-      genai:
-        api-key: ${GEMINI_API_KEY}
-        chat:
-          options:
-            model: gemini-2.0-flash
-            temperature: 0.5
+    url: jdbc:postgresql://postgres:5432/metriplate
 
   jpa:
     show-sql: true

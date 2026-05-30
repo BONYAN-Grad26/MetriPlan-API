@@ -22,6 +22,7 @@ import com.abdelaziz26.metriplate.utils.ai.WeeklyDietPlanPromptBuilder;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ import com.abdelaziz26.metriplate.repositories.DietWeeklyPlanRepository;
 import com.abdelaziz26.metriplate.repositories.DailyPlanRepository;
 import com.abdelaziz26.metriplate.dtos.plan.DayDTO;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -69,7 +71,11 @@ public class DietPlanServiceImpl implements DietPlanService{
 
             String llmResponse = llmClient.generateContent(prompt);
 
+            log.info("LLM Response: {}", llmResponse);
+
             WeekDTO weekDto = dietJsonParser.parseWeeklyPlanResponse(llmResponse, startDate, weekNumber);
+
+            log.info("Parsed WeekDTO: {}", weekDto);
 
             WeeklyPlan wp = repoOrchestrator.saveWeeklyPlan(weekDto);
 
@@ -150,7 +156,7 @@ public class DietPlanServiceImpl implements DietPlanService{
         WeeklyPlan mapped = weeklyPlanMapper.toEntity(updatedPlan);
         mapped.setId(existing.getId());
         mapped.setUser(existing.getUser());
-        mapped.setDietPlan(existing.getDietPlan());
+        //mapped.setDietPlan(existing.getDietPlan());
 
         WeeklyPlan saved = weeklyPlanRepository.save(mapped);
         WeekDTO dto = weeklyPlanMapper.toDto(saved);

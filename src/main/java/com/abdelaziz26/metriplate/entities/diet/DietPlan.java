@@ -63,10 +63,10 @@ public class DietPlan {
     @Column(length = 2000)
     private String aiSuccessTips;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "dietPlan", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("weekNumber ASC")
-    private List<WeeklyPlan> weeklyPlans = new ArrayList<>();
+    //@Builder.Default
+    //@OneToMany(mappedBy = "dietPlan", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@OrderBy("weekNumber ASC")
+    //private List<WeeklyPlan> weeklyPlans = new ArrayList<>();
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

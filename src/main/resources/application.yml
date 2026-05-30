@@ -13,14 +13,14 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+
   ai:
-    model:
-      chat: google-genai
     google:
       genai:
         api-key: ${GEMINI_API_KEY}
-
-
+        chat:
+          options:
+            model: gemini-2.5-flash
 
 
   jackson:

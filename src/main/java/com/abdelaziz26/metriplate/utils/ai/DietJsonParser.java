@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,181 +23,182 @@ public class DietJsonParser {
 
     private final ObjectMapper objectMapper;
 
-    public WeekDTO parseWeeklyPlanResponse(String jsonResponse, LocalDate startDate, int weekNumber)
-            throws IOException, PlanGenerationException {
+    public WeekDTO parseWeeklyPlanResponse(String json, LocalDate startDate, int weekNumber) throws Exception {
+        String cleanJson = stripMarkdownFences(json);
+        JsonNode root = objectMapper.readTree(cleanJson);
+        JsonNode mealPlan = root.path("meal_plan");
 
-        JsonNode rootNode = objectMapper.readTree(jsonResponse);
-
-        if (rootNode.has("error")) {
-            throw new PlanGenerationException("LLM returned error: " + rootNode.get("reason").asText());
-        }
-
-        WeekDTO weekDto = new WeekDTO();
-
-        if (rootNode.has("weekNumber")) {
-            weekDto.setWeekNumber(rootNode.get("weekNumber").asInt());
-        } else {
-            weekDto.setWeekNumber(weekNumber);
+        if (mealPlan.isMissingNode() || !mealPlan.isArray() || mealPlan.isEmpty()) {
+            throw new IllegalArgumentException("Invalid meal plan JSON: missing or empty 'meal_plan' array");
         }
 
-        if (rootNode.has("startDate")) {
-            weekDto.setStartDate(rootNode.get("startDate").asText());
-        } else {
-            weekDto.setStartDate(startDate.toString());
+        WeekDTO week = buildWeekDTO(mealPlan, startDate, weekNumber);
+        week.setDays(buildDays(mealPlan));
+        return week;
+    }
+
+    private String stripMarkdownFences(String raw) {
+        if (raw == null) return "";
+        String stripped = raw.strip();
+        if (stripped.startsWith("```")) {
+            stripped = stripped.replaceFirst("^```(?:json)?\\s*", "");
+            stripped = stripped.replaceFirst("\\s*```$", "");
+        }
+        return stripped.strip();
+    }
+
+    // -------------------------------------------------------------------------
+    // Week
+    // -------------------------------------------------------------------------
+
+    private WeekDTO buildWeekDTO(JsonNode mealPlan, LocalDate startDate, int weekNumber) {
+        WeekDTO week = new WeekDTO();
+
+        String firstDate = mealPlan.get(0).path("date").asText();
+        String lastDate  = mealPlan.get(mealPlan.size() - 1).path("date").asText();
+
+        week.setStartDate(firstDate.isBlank() ? startDate.toString() : firstDate);
+        week.setEndDate(lastDate.isBlank() ? startDate.plusDays(6).toString() : lastDate);
+        week.setWeekNumber(firstDate.isBlank() ? weekNumber : resolveWeekNumber(firstDate));
+
+        double totalCalories = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0;
+        for (JsonNode day : mealPlan) {
+            JsonNode totals = day.path("daily_totals");
+            totalCalories += totals.path("calories").asDouble();
+            totalProtein  += totals.path("protein").asDouble();
+            totalCarbs    += totals.path("carbs").asDouble();
+            totalFat      += totals.path("fat").asDouble();
         }
 
-        if (rootNode.has("endDate")) {
-            weekDto.setEndDate(rootNode.get("endDate").asText());
-        } else {
-            LocalDate endDate = startDate.plusDays(6);
-            weekDto.setEndDate(endDate.toString());
-        }
+        week.setWeeklyCalorieTarget(totalCalories);
+        week.setWeeklyProteinTarget(totalProtein);
+        week.setWeeklyCarbTarget(totalCarbs);
+        week.setWeeklyFatTarget(totalFat);
 
-        if (rootNode.has("weeklyCalorieTarget")) {
-            weekDto.setWeeklyCalorieTarget(rootNode.get("weeklyCalorieTarget").asDouble());
-        }
-        if (rootNode.has("weeklyProteinTarget")) {
-            weekDto.setWeeklyProteinTarget(rootNode.get("weeklyProteinTarget").asDouble());
-        }
-        if (rootNode.has("weeklyCarbTarget")) {
-            weekDto.setWeeklyCarbTarget(rootNode.get("weeklyCarbTarget").asDouble());
-        }
-        if (rootNode.has("weeklyFatTarget")) {
-            weekDto.setWeeklyFatTarget(rootNode.get("weeklyFatTarget").asDouble());
-        }
-        if (rootNode.has("weeklyStrategy")) {
-            weekDto.setWeeklyStrategy(rootNode.get("weeklyStrategy").asText());
-        }
-        if (rootNode.has("aiPreparationTips")) {
-            weekDto.setAiPreparationTips(rootNode.get("aiPreparationTips").asText());
-        }
+        return week;
+    }
 
+    private int resolveWeekNumber(String isoDate) {
+        LocalDate date = LocalDate.parse(isoDate, DateTimeFormatter.ISO_LOCAL_DATE);
+        return date.get(WeekFields.ISO.weekOfWeekBasedYear());
+    }
+
+    // -------------------------------------------------------------------------
+    // Days
+    // -------------------------------------------------------------------------
+
+    private List<DayDTO> buildDays(JsonNode mealPlan) {
         List<DayDTO> days = new ArrayList<>();
-        JsonNode daysNode = rootNode.get("days");
-        if (daysNode != null && daysNode.isArray()) {
-            for (JsonNode dayNode : daysNode) {
-                DayDTO dayDto = parseDay(dayNode);
-                days.add(dayDto);
-            }
+        int dayIndex = 1;
+        for (JsonNode dayNode : mealPlan) {
+            days.add(buildDayDTO(dayNode, dayIndex++));
         }
-        weekDto.setDays(days);
-
-        return weekDto;
+        return days;
     }
 
-    public DayDTO parseDay(JsonNode dayNode) throws IOException {
-        DayDTO dayDto = new DayDTO();
+    private DayDTO buildDayDTO(JsonNode dayNode, int dayIndex) {
+        DayDTO day = new DayDTO();
 
-        if (dayNode.has("date")) {
-            dayDto.setDate(dayNode.get("date").asText());
-        }
-        if (dayNode.has("dayOfWeek")) {
-            dayDto.setDayOfWeek(dayNode.get("dayOfWeek").asInt());
-        }
-        if (dayNode.has("targetCalories")) {
-            dayDto.setTargetCalories(dayNode.get("targetCalories").asDouble());
-        }
-        if (dayNode.has("targetProtein")) {
-            dayDto.setTargetProtein(dayNode.get("targetProtein").asDouble());
-        }
-        if (dayNode.has("targetCarbs")) {
-            dayDto.setTargetCarbs(dayNode.get("targetCarbs").asDouble());
-        }
-        if (dayNode.has("targetFat")) {
-            dayDto.setTargetFat(dayNode.get("targetFat").asDouble());
-        }
-        if (dayNode.has("targetFiber")) {
-            dayDto.setTargetFiber(dayNode.get("targetFiber").asDouble());
-        }
-        if (dayNode.has("targetSugar")) {
-            dayDto.setTargetSugar(dayNode.get("targetSugar").asDouble());
-        }
-        if (dayNode.has("waterGoal")) {
-            dayDto.setWaterGoal(dayNode.get("waterGoal").asDouble());
-        }
-        if (dayNode.has("aiDailyTips")) {
-            dayDto.setAiDailyTips(dayNode.get("aiDailyTips").asText());
-        }
+        day.setDate(dayNode.path("date").asText());
+        day.setDayOfWeek(dayIndex);
 
-        // Parse meals using the existing DayDTO mapper or inline
-        List<com.abdelaziz26.metriplate.dtos.plan.MealDTO> meals = new ArrayList<>();
-        JsonNode mealsNode = dayNode.get("meals");
-        if (mealsNode != null && mealsNode.isArray()) {
-            for (JsonNode mealNode : mealsNode) {
-                com.abdelaziz26.metriplate.dtos.plan.MealDTO mealDto = parseMeal(mealNode);
-                meals.add(mealDto);
-            }
-        }
-        dayDto.setMeals(meals);
+        JsonNode totals = dayNode.path("daily_totals");
+        day.setTargetCalories(totals.path("calories").asDouble());
+        day.setTargetProtein(totals.path("protein").asDouble());
+        day.setTargetCarbs(totals.path("carbs").asDouble());
+        day.setTargetFat(totals.path("fat").asDouble());
+        day.setTargetFiber(totals.path("fiber").asDouble());
+        day.setTargetSugar(totals.path("sugar").asDouble());
+        day.setWaterGoal(totals.path("water_intake").asDouble());
 
-        return dayDto;
+        day.setMeals(buildMeals(dayNode.path("meals")));
+        return day;
     }
 
-    public MealDTO parseMeal(JsonNode mealNode) throws IOException {
-        com.abdelaziz26.metriplate.dtos.plan.MealDTO mealDto = new com.abdelaziz26.metriplate.dtos.plan.MealDTO();
+    // -------------------------------------------------------------------------
+    // Meals
+    // -------------------------------------------------------------------------
 
-        if (mealNode.has("name")) {
-            mealDto.setName(mealNode.get("name").asText());
+    private List<MealDTO> buildMeals(JsonNode mealsNode) {
+        List<MealDTO> meals = new ArrayList<>();
+        int order = 1;
+        for (JsonNode mealNode : mealsNode) {
+            meals.add(buildMealDTO(mealNode, order++));
         }
-        if (mealNode.has("mealType")) {
-            mealDto.setMealType(mealNode.get("mealType").asText());
-        }
-        if (mealNode.has("description")) {
-            mealDto.setDescription(mealNode.get("description").asText());
-        }
-        if (mealNode.has("preparationTime")) {
-            mealDto.setPreparationTime(mealNode.get("preparationTime").asInt());
-        }
-        if (mealNode.has("preparationInstructions")) {
-            mealDto.setPreparationInstructions(mealNode.get("preparationInstructions").asText());
-        }
-        if (mealNode.has("order")) {
-            mealDto.setOrder(mealNode.get("order").asInt());
-        }
-
-        // Parse ingredients
-        List<com.abdelaziz26.metriplate.dtos.plan.IngredientDTO> ingredients = new ArrayList<>();
-        JsonNode ingredientsNode = mealNode.get("ingredients");
-        if (ingredientsNode != null && ingredientsNode.isArray()) {
-            for (JsonNode ingredientNode : ingredientsNode) {
-                com.abdelaziz26.metriplate.dtos.plan.IngredientDTO ingredientDto = parseIngredient(ingredientNode);
-                ingredients.add(ingredientDto);
-            }
-        }
-        mealDto.setIngredients(ingredients);
-
-        return mealDto;
+        return meals;
     }
 
-    public IngredientDTO parseIngredient(JsonNode ingredientNode) {
-        com.abdelaziz26.metriplate.dtos.plan.IngredientDTO ingredientDto =
-                new com.abdelaziz26.metriplate.dtos.plan.IngredientDTO();
+    private MealDTO buildMealDTO(JsonNode mealNode, int order) {
+        MealDTO meal = new MealDTO();
 
-        if (ingredientNode.has("ingredientId")) {
-            ingredientDto.setIngredientId(ingredientNode.get("ingredientId").asLong());
-        }
-        if (ingredientNode.has("ingredientName")) {
-            ingredientDto.setIngredientName(ingredientNode.get("ingredientName").asText());
-        }
-        if (ingredientNode.has("quantity")) {
-            ingredientDto.setQuantity(ingredientNode.get("quantity").asDouble());
-        }
-        if (ingredientNode.has("measurementUnit")) {
-            ingredientDto.setMeasurementUnit(ingredientNode.get("measurementUnit").asText());
-        }
-        if (ingredientNode.has("calories")) {
-            ingredientDto.setCalories(ingredientNode.get("calories").asDouble());
-        }
-        if (ingredientNode.has("protein")) {
-            ingredientDto.setProtein(ingredientNode.get("protein").asDouble());
-        }
-        if (ingredientNode.has("carbs")) {
-            ingredientDto.setCarbs(ingredientNode.get("carbs").asDouble());
-        }
-        if (ingredientNode.has("fat")) {
-            ingredientDto.setFat(ingredientNode.get("fat").asDouble());
+        meal.setName(mealNode.path("name").asText());
+        meal.setMealType(mealNode.path("meal_type").asText());
+        meal.setPreparationInstructions(mealNode.path("instructions").asText());
+        meal.setOrder(order);
+
+        JsonNode macros = mealNode.path("macros");
+        if (!macros.isMissingNode()) {
+            meal.setDescription(buildMacroDescription(macros));
         }
 
-        return ingredientDto;
+        meal.setIngredients(buildIngredients(mealNode.path("ingredients")));
+        return meal;
+    }
+
+    private String buildMacroDescription(JsonNode macros) {
+        return String.format(
+                "Calories: %.1f | Protein: %.1fg | Carbs: %.1fg | Fat: %.1fg",
+                macros.path("calories").asDouble(),
+                macros.path("protein").asDouble(),
+                macros.path("carbs").asDouble(),
+                macros.path("fat").asDouble()
+        );
+    }
+
+    // -------------------------------------------------------------------------
+    // Ingredients
+    // -------------------------------------------------------------------------
+
+    private List<IngredientDTO> buildIngredients(JsonNode ingredientsNode) {
+        List<IngredientDTO> ingredients = new ArrayList<>();
+        for (JsonNode ingNode : ingredientsNode) {
+            ingredients.add(buildIngredientDTO(ingNode));
+        }
+        return ingredients;
+    }
+
+    private IngredientDTO buildIngredientDTO(JsonNode ingNode) {
+        IngredientDTO ing = new IngredientDTO();
+
+        if (ingNode.hasNonNull("id")) {
+            ing.setIngredientId(ingNode.path("id").asLong());
+        }
+
+        ing.setIngredientName(ingNode.path("name").asText());
+        ing.setQuantity(ingNode.path("quantity").asDouble());
+        ing.setMeasurementUnit(normalizeUnit(ingNode.path("unit").asText()));
+
+        if (ingNode.hasNonNull("calories")) ing.setCalories(ingNode.path("calories").asDouble());
+        if (ingNode.hasNonNull("protein"))  ing.setProtein(ingNode.path("protein").asDouble());
+        if (ingNode.hasNonNull("carbs"))    ing.setCarbs(ingNode.path("carbs").asDouble());
+        if (ingNode.hasNonNull("fat"))      ing.setFat(ingNode.path("fat").asDouble());
+
+        return ing;
+    }
+
+    private String normalizeUnit(String raw) {
+        if (raw == null) return "g";
+        return switch (raw.trim().toLowerCase()) {
+            case "ml", "milliliter", "millilitre" -> "ml";
+            case "kg", "kilogram"                 -> "kg";
+            case "l", "liter", "litre"            -> "l";
+            case "cup", "cups"                    -> "cup";
+            case "tbsp", "tablespoon"             -> "tbsp";
+            case "tsp", "teaspoon"                -> "tsp";
+            case "piece", "pieces", "pcs", "pc"  -> "piece";
+            case "oz", "ounce"                    -> "oz";
+            case "lb", "pound"                    -> "lb";
+            default                               -> "g";
+        };
     }
 }
