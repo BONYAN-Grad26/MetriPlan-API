@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.dtos.allergy;
 
-import com.abdelaziz26.metriplate.enums.AllergenType;
+import com.abdelaziz26.metriplate.enums.user.AllergenType;
 import com.abdelaziz26.metriplate.utils.annotations.ValidateEnumValue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

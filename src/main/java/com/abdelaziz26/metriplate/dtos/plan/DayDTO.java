@@ -8,6 +8,8 @@ import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
 public class DayDTO {
+    // Optional id (maps to DailyPlan entity when present)
+    private Long id;
 
     private String date;
     private Integer dayOfWeek;

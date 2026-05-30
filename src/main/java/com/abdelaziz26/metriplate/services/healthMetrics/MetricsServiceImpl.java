@@ -12,7 +12,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Errors;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.security.SecurityContextService;
 import com.abdelaziz26.metriplate.utils.NutritionCalculator;
-import com.abdelaziz26.metriplate.utils.mappers.MetricsMapper;
+import com.abdelaziz26.metriplate.mappers.MetricsMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

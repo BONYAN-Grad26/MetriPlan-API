@@ -8,6 +8,9 @@ import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
 public class WeekDTO {
+    // Optional id for mapping to WeeklyPlan entity
+    private Long id;
+
     private Integer weekNumber;
     private String startDate;
     private String endDate;

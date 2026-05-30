@@ -28,4 +28,6 @@ public interface IngredientRepository extends JpaRepository<@NotNull Ingredient,
     List<Ingredient> findAllWithDietaryTags();
 
     List<Ingredient> findByNameIn(List<String> names);
+
+    Optional<Ingredient> findByNameIgnoreCase(String name);
 }

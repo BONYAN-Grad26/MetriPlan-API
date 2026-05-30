@@ -1,5 +1,6 @@
 package com.abdelaziz26.metriplate.entities.diet;
 
+import com.abdelaziz26.metriplate.entities.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -45,6 +46,10 @@ public class WeeklyPlan {
     @ManyToOne
     @JoinColumn(nullable = false, name = "diet_plan_id")
     private DietPlan dietPlan;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(length = 1000)
     private String aiPreparationTips;

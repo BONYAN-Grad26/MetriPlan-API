@@ -1,7 +1,7 @@
 package com.abdelaziz26.metriplate.entities.user;
 
 import com.abdelaziz26.metriplate.entities.diet.Ingredient;
-import com.abdelaziz26.metriplate.enums.AllergenType;
+import com.abdelaziz26.metriplate.enums.user.AllergenType;
 import jakarta.persistence.*;
 import lombok.*;
 

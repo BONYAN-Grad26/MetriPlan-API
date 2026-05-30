@@ -1,0 +1,1174 @@
+{
+  "weekNumber": 1,
+  "startDate": "2026-05-19",
+  "endDate": "2026-05-25",
+  "weeklyCalorieTarget": 14700,
+  "weeklyProteinTarget": 630,
+  "weeklyCarbTarget": 1715,
+  "weeklyFatTarget": 490,
+  "weeklyStrategy": "This week focuses on protein-rich meals combined with complex carbohydrates to support muscle building while maintaining a caloric surplus. The plan emphasizes whole food sources and balanced macronutrient distribution across all meals.",
+  "aiPreparationTips": "Shop for: chicken breasts, eggs, oats, sweet potatoes, broccoli, brown rice, salmon, greek yogurt, almonds. Prep proteins in bulk on Sunday for the week. Pre-cook grains and freeze portions for quick meal assembly.",
+  "days": [
+    {
+      "dayOfWeek": 1,
+      "date": "2026-05-19",
+      "targetCalories": 2100,
+      "targetProtein": 90,
+      "targetCarbs": 245,
+      "targetFat": 70,
+      "targetFiber": 30,
+      "targetSugar": 50,
+      "waterGoal": 3000,
+      "aiDailyTips": "Monday is a great day to start strong. Focus on hydration after the weekend and ensure you hit your protein targets with the provided meals.",
+      "meals": [
+        {
+          "mealType": "BREAKFAST",
+          "name": "Protein Oatmeal with Berries",
+          "description": "Hearty oatmeal bowl topped with whey protein powder, fresh blueberries, and almonds",
+          "preparationTime": 15,
+          "preparationInstructions": "1. Boil water and add oats, cook for 5 minutes. 2. Mix in protein powder (vanilla) and stir well. 3. Top with blueberries and sliced almonds. 4. Add honey drizzle.",
+          "ingredients": [
+            {
+              "ingredientId": 1,
+              "ingredientName": "Oats",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 304,
+              "protein": 10.7,
+              "carbs": 54.3,
+              "fat": 5.0
+            },
+            {
+              "ingredientId": 15,
+              "ingredientName": "Almonds",
+              "quantity": 30,
+              "measurementUnit": "g",
+              "calories": 179,
+              "protein": 6.3,
+              "carbs": 6.1,
+              "fat": 15.6
+            },
+            {
+              "ingredientId": 22,
+              "ingredientName": "Blueberries",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 57,
+              "protein": 0.7,
+              "carbs": 14.5,
+              "fat": 0.3
+            }
+          ]
+        },
+        {
+          "mealType": "LUNCH",
+          "name": "Grilled Chicken with Brown Rice and Broccoli",
+          "description": "Lean protein paired with complex carbs and nutrient-dense vegetables",
+          "preparationTime": 35,
+          "preparationInstructions": "1. Season chicken breast with salt, pepper, garlic powder. 2. Grill for 7-8 minutes per side until internal temp reaches 75°C. 3. Cook brown rice according to package. 4. Steam broccoli for 5-7 minutes. 5. Combine on plate with olive oil drizzle.",
+          "ingredients": [
+            {
+              "ingredientId": 5,
+              "ingredientName": "Chicken Breast",
+              "quantity": 200,
+              "measurementUnit": "g",
+              "calories": 330,
+              "protein": 62,
+              "carbs": 0,
+              "fat": 7.2
+            },
+            {
+              "ingredientId": 8,
+              "ingredientName": "Brown Rice",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 111,
+              "protein": 2.6,
+              "carbs": 23.0,
+              "fat": 0.9
+            },
+            {
+              "ingredientId": 20,
+              "ingredientName": "Broccoli",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 52,
+              "protein": 3.7,
+              "carbs": 9.8,
+              "fat": 0.4
+            },
+            {
+              "ingredientId": 25,
+              "ingredientName": "Olive Oil",
+              "quantity": 10,
+              "measurementUnit": "ml",
+              "calories": 88,
+              "protein": 0,
+              "carbs": 0,
+              "fat": 10.0
+            }
+          ]
+        },
+        {
+          "mealType": "SNACK",
+          "name": "Greek Yogurt with Honey and Granola",
+          "description": "High-protein snack with probiotics and quick carbs",
+          "preparationTime": 5,
+          "preparationInstructions": "1. Scoop greek yogurt into bowl. 2. Drizzle honey. 3. Top with granola. 4. Mix and enjoy.",
+          "ingredients": [
+            {
+              "ingredientId": 12,
+              "ingredientName": "Greek Yogurt",
+              "quantity": 200,
+              "measurementUnit": "g",
+              "calories": 130,
+              "protein": 19.0,
+              "carbs": 9.2,
+              "fat": 0.4
+            },
+            {
+              "ingredientId": 23,
+              "ingredientName": "Honey",
+              "quantity": 20,
+              "measurementUnit": "g",
+              "calories": 61,
+              "protein": 0.1,
+              "carbs": 17.3,
+              "fat": 0
+            }
+          ]
+        },
+        {
+          "mealType": "DINNER",
+          "name": "Baked Salmon with Sweet Potato and Asparagus",
+          "description": "Omega-3 rich fish with nutrient-dense carbs and vegetables",
+          "preparationTime": 40,
+          "preparationInstructions": "1. Preheat oven to 200°C. 2. Season salmon with lemon, herbs, salt, pepper. 3. Bake for 15 minutes. 4. Cube sweet potato, toss with olive oil, bake at 200°C for 25 minutes. 5. Steam asparagus for 8 minutes. 6. Plate everything together.",
+          "ingredients": [
+            {
+              "ingredientId": 7,
+              "ingredientName": "Salmon",
+              "quantity": 180,
+              "measurementUnit": "g",
+              "calories": 280,
+              "protein": 35.0,
+              "carbs": 0,
+              "fat": 14.0
+            },
+            {
+              "ingredientId": 11,
+              "ingredientName": "Sweet Potato",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 103,
+              "protein": 1.6,
+              "carbs": 23.6,
+              "fat": 0.1
+            },
+            {
+              "ingredientId": 21,
+              "ingredientName": "Asparagus",
+              "quantity": 120,
+              "measurementUnit": "g",
+              "calories": 27,
+              "protein": 3.1,
+              "carbs": 5.2,
+              "fat": 0.1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dayOfWeek": 2,
+      "date": "2026-05-20",
+      "targetCalories": 2100,
+      "targetProtein": 90,
+      "targetCarbs": 245,
+      "targetFat": 70,
+      "targetFiber": 30,
+      "targetSugar": 50,
+      "waterGoal": 3000,
+      "aiDailyTips": "Tuesday: Continue strong with protein intake. This is a good day to do your gym session - fuel your workout with the pre-workout snack.",
+      "meals": [
+        {
+          "mealType": "BREAKFAST",
+          "name": "Eggs and Toast with Avocado",
+          "description": "Complete protein breakfast with healthy fats and whole grains",
+          "preparationTime": 12,
+          "preparationInstructions": "1. Toast 2 slices whole wheat bread. 2. Scramble 3 eggs with butter in pan, 5-7 minutes. 3. Slice half avocado. 4. Assemble on toast with salt and pepper.",
+          "ingredients": [
+            {
+              "ingredientId": 3,
+              "ingredientName": "Eggs",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 233,
+              "protein": 18.5,
+              "carbs": 1.1,
+              "fat": 16.5
+            },
+            {
+              "ingredientId": 2,
+              "ingredientName": "Whole Wheat Bread",
+              "quantity": 60,
+              "measurementUnit": "g",
+              "calories": 160,
+              "protein": 5.5,
+              "carbs": 28.5,
+              "fat": 2.0
+            },
+            {
+              "ingredientId": 16,
+              "ingredientName": "Avocado",
+              "quantity": 75,
+              "measurementUnit": "g",
+              "calories": 120,
+              "protein": 1.5,
+              "carbs": 6.3,
+              "fat": 10.9
+            }
+          ]
+        },
+        {
+          "mealType": "PRE_WORKOUT",
+          "name": "Banana with Peanut Butter",
+          "description": "Quick energy source before training",
+          "preparationTime": 3,
+          "preparationInstructions": "1. Slice banana. 2. Spread peanut butter on banana slices. 3. Eat 30-40 minutes before workout.",
+          "ingredients": [
+            {
+              "ingredientId": 18,
+              "ingredientName": "Banana",
+              "quantity": 120,
+              "measurementUnit": "g",
+              "calories": 107,
+              "protein": 1.3,
+              "carbs": 27.2,
+              "fat": 0.3
+            },
+            {
+              "ingredientId": 24,
+              "ingredientName": "Peanut Butter",
+              "quantity": 25,
+              "measurementUnit": "g",
+              "calories": 141,
+              "protein": 6.3,
+              "carbs": 5.1,
+              "fat": 12.3
+            }
+          ]
+        },
+        {
+          "mealType": "LUNCH",
+          "name": "Turkey Burger with Sweet Potato Fries",
+          "description": "Lean meat protein with complex carbs",
+          "preparationTime": 30,
+          "preparationInstructions": "1. Season ground turkey with herbs, form into patty. 2. Cook burger in skillet for 5 minutes per side. 3. Cut sweet potato into fries, toss with oil, bake at 220°C for 20 minutes. 4. Serve with whole wheat bun and vegetables.",
+          "ingredients": [
+            {
+              "ingredientId": 6,
+              "ingredientName": "Turkey Ground",
+              "quantity": 180,
+              "measurementUnit": "g",
+              "calories": 197,
+              "protein": 26.0,
+              "carbs": 0,
+              "fat": 9.4
+            },
+            {
+              "ingredientId": 11,
+              "ingredientName": "Sweet Potato",
+              "quantity": 160,
+              "measurementUnit": "g",
+              "calories": 110,
+              "protein": 1.7,
+              "carbs": 25.2,
+              "fat": 0.1
+            },
+            {
+              "ingredientId": 17,
+              "ingredientName": "Lettuce",
+              "quantity": 50,
+              "measurementUnit": "g",
+              "calories": 15,
+              "protein": 1.2,
+              "carbs": 2.9,
+              "fat": 0.2
+            },
+            {
+              "ingredientId": 19,
+              "ingredientName": "Tomato",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 18,
+              "protein": 0.9,
+              "carbs": 3.9,
+              "fat": 0.2
+            }
+          ]
+        },
+        {
+          "mealType": "POST_WORKOUT",
+          "name": "Protein Shake with Banana",
+          "description": "Fast-absorbing carbs and protein for post-workout recovery",
+          "preparationTime": 5,
+          "preparationInstructions": "1. Blend 1 scoop whey protein with 200ml milk. 2. Add half banana. 3. Blend until smooth. 4. Drink immediately after workout.",
+          "ingredients": [
+            {
+              "ingredientId": 14,
+              "ingredientName": "Whey Protein Powder",
+              "quantity": 30,
+              "measurementUnit": "g",
+              "calories": 120,
+              "protein": 25.0,
+              "carbs": 2.0,
+              "fat": 1.5
+            },
+            {
+              "ingredientId": 18,
+              "ingredientName": "Banana",
+              "quantity": 60,
+              "measurementUnit": "g",
+              "calories": 53,
+              "protein": 0.7,
+              "carbs": 13.6,
+              "fat": 0.2
+            },
+            {
+              "ingredientId": 10,
+              "ingredientName": "Whole Milk",
+              "quantity": 200,
+              "measurementUnit": "ml",
+              "calories": 134,
+              "protein": 6.8,
+              "carbs": 9.7,
+              "fat": 7.4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dayOfWeek": 3,
+      "date": "2026-05-21",
+      "targetCalories": 2100,
+      "targetProtein": 90,
+      "targetCarbs": 245,
+      "targetFat": 70,
+      "targetFiber": 30,
+      "targetSugar": 50,
+      "waterGoal": 3000,
+      "aiDailyTips": "Wednesday: Mid-week check-in. Ensure you're staying hydrated and getting 7-8 hours of sleep for optimal recovery.",
+      "meals": [
+        {
+          "mealType": "BREAKFAST",
+          "name": "Protein Pancakes with Berries",
+          "description": "Delicious breakfast that feels like a treat but hits your macros",
+          "preparationTime": 20,
+          "preparationInstructions": "1. Mix 1 scoop protein powder, 2 eggs, 1/4 cup oats, milk. 2. Pour onto greased pan, cook 3-4 minutes per side. 3. Top with fresh berries and Greek yogurt.",
+          "ingredients": [
+            {
+              "ingredientId": 14,
+              "ingredientName": "Whey Protein Powder",
+              "quantity": 30,
+              "measurementUnit": "g",
+              "calories": 120,
+              "protein": 25.0,
+              "carbs": 2.0,
+              "fat": 1.5
+            },
+            {
+              "ingredientId": 3,
+              "ingredientName": "Eggs",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 155,
+              "protein": 12.3,
+              "carbs": 0.7,
+              "fat": 11.0
+            },
+            {
+              "ingredientId": 1,
+              "ingredientName": "Oats",
+              "quantity": 40,
+              "measurementUnit": "g",
+              "calories": 152,
+              "protein": 5.4,
+              "carbs": 27.2,
+              "fat": 2.5
+            },
+            {
+              "ingredientId": 22,
+              "ingredientName": "Blueberries",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 46,
+              "protein": 0.6,
+              "carbs": 11.6,
+              "fat": 0.2
+            }
+          ]
+        },
+        {
+          "mealType": "LUNCH",
+          "name": "Beef and Quinoa Bowl",
+          "description": "Complete amino acid profile with super grain",
+          "preparationTime": 35,
+          "preparationInstructions": "1. Brown lean ground beef with onions and garlic. 2. Cook quinoa per package. 3. Mix together with roasted vegetables (bell peppers, zucchini). 4. Drizzle with olive oil and lime juice.",
+          "ingredients": [
+            {
+              "ingredientId": 9,
+              "ingredientName": "Lean Ground Beef",
+              "quantity": 180,
+              "measurementUnit": "g",
+              "calories": 250,
+              "protein": 28.0,
+              "carbs": 0,
+              "fat": 14.3
+            },
+            {
+              "ingredientId": 13,
+              "ingredientName": "Quinoa",
+              "quantity": 120,
+              "measurementUnit": "g",
+              "calories": 474,
+              "protein": 16.8,
+              "carbs": 84.3,
+              "fat": 7.7
+            },
+            {
+              "ingredientId": 20,
+              "ingredientName": "Broccoli",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 35,
+              "protein": 2.5,
+              "carbs": 6.5,
+              "fat": 0.3
+            }
+          ]
+        },
+        {
+          "mealType": "SNACK",
+          "name": "Mixed Nuts and Apple",
+          "description": "Quick energy with healthy fats and natural sugars",
+          "preparationTime": 2,
+          "preparationInstructions": "1. Portion out mixed nuts (almonds, cashews). 2. Slice apple. 3. Enjoy together.",
+          "ingredients": [
+            {
+              "ingredientId": 15,
+              "ingredientName": "Almonds",
+              "quantity": 25,
+              "measurementUnit": "g",
+              "calories": 149,
+              "protein": 5.3,
+              "carbs": 5.1,
+              "fat": 13.0
+            },
+            {
+              "ingredientId": 26,
+              "ingredientName": "Apple",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 81,
+              "protein": 0.4,
+              "carbs": 21.7,
+              "fat": 0.2
+            }
+          ]
+        },
+        {
+          "mealType": "DINNER",
+          "name": "Baked Tilapia with Roasted Vegetables",
+          "description": "Light white fish with seasonal roasted vegetables",
+          "preparationTime": 30,
+          "preparationInstructions": "1. Preheat oven to 200°C. 2. Season tilapia with herbs, lemon, bake for 12 minutes. 3. Toss mixed vegetables (bell pepper, zucchini, onion) with olive oil, bake at 200°C for 20 minutes. 4. Serve together.",
+          "ingredients": [
+            {
+              "ingredientId": 4,
+              "ingredientName": "Tilapia",
+              "quantity": 200,
+              "measurementUnit": "g",
+              "calories": 128,
+              "protein": 26.0,
+              "carbs": 0,
+              "fat": 2.4
+            },
+            {
+              "ingredientId": 21,
+              "ingredientName": "Asparagus",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 34,
+              "protein": 3.9,
+              "carbs": 6.5,
+              "fat": 0.1
+            },
+            {
+              "ingredientId": 27,
+              "ingredientName": "Bell Pepper",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 31,
+              "protein": 1.0,
+              "carbs": 7.3,
+              "fat": 0.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dayOfWeek": 4,
+      "date": "2026-05-22",
+      "targetCalories": 2100,
+      "targetProtein": 90,
+      "targetCarbs": 245,
+      "targetFat": 70,
+      "targetFiber": 30,
+      "targetSugar": 50,
+      "waterGoal": 3000,
+      "aiDailyTips": "Thursday: You're over halfway through the week! Energy levels should be high. Consider doing a more intense workout.",
+      "meals": [
+        {
+          "mealType": "BREAKFAST",
+          "name": "Cottage Cheese Bowl with Granola",
+          "description": "High-casein protein breakfast for steady energy release",
+          "preparationTime": 5,
+          "preparationInstructions": "1. Scoop cottage cheese into bowl. 2. Add granola. 3. Top with berries. 4. Drizzle honey.",
+          "ingredients": [
+            {
+              "ingredientId": 11,
+              "ingredientName": "Cottage Cheese",
+              "quantity": 200,
+              "measurementUnit": "g",
+              "calories": 110,
+              "protein": 22.0,
+              "carbs": 3.4,
+              "fat": 1.1
+            },
+            {
+              "ingredientId": 22,
+              "ingredientName": "Blueberries",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 57,
+              "protein": 0.7,
+              "carbs": 14.5,
+              "fat": 0.3
+            },
+            {
+              "ingredientId": 23,
+              "ingredientName": "Honey",
+              "quantity": 15,
+              "measurementUnit": "g",
+              "calories": 46,
+              "protein": 0.1,
+              "carbs": 13.0,
+              "fat": 0
+            }
+          ]
+        },
+        {
+          "mealType": "LUNCH",
+          "name": "Tuna Salad with Olive Oil Dressing",
+          "description": "Omega-3 rich meal with fresh vegetables",
+          "preparationTime": 15,
+          "preparationInstructions": "1. Mix canned tuna (drained) with mayo, lemon juice. 2. Prepare mixed greens base. 3. Add cherry tomatoes, cucumber, red onion. 4. Top with tuna mixture. 5. Drizzle with olive oil and vinegar.",
+          "ingredients": [
+            {
+              "ingredientId": 28,
+              "ingredientName": "Canned Tuna",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 99,
+              "protein": 21.5,
+              "carbs": 0,
+              "fat": 0.8
+            },
+            {
+              "ingredientId": 17,
+              "ingredientName": "Lettuce",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 30,
+              "protein": 2.4,
+              "carbs": 5.8,
+              "fat": 0.4
+            },
+            {
+              "ingredientId": 25,
+              "ingredientName": "Olive Oil",
+              "quantity": 15,
+              "measurementUnit": "ml",
+              "calories": 132,
+              "protein": 0,
+              "carbs": 0,
+              "fat": 15.0
+            }
+          ]
+        },
+        {
+          "mealType": "SNACK",
+          "name": "Protein Bar with Almonds",
+          "description": "Convenient snack to maintain energy",
+          "preparationTime": 0,
+          "preparationInstructions": "1. Grab protein bar. 2. Handful of almonds. 3. Enjoy.",
+          "ingredients": [
+            {
+              "ingredientId": 29,
+              "ingredientName": "Protein Bar",
+              "quantity": 1,
+              "measurementUnit": "piece",
+              "calories": 200,
+              "protein": 20.0,
+              "carbs": 15.0,
+              "fat": 6.0
+            },
+            {
+              "ingredientId": 15,
+              "ingredientName": "Almonds",
+              "quantity": 30,
+              "measurementUnit": "g",
+              "calories": 179,
+              "protein": 6.3,
+              "carbs": 6.1,
+              "fat": 15.6
+            }
+          ]
+        },
+        {
+          "mealType": "DINNER",
+          "name": "Lamb Chops with Roasted Root Vegetables",
+          "description": "Premium protein with nutrient-dense carbs",
+          "preparationTime": 40,
+          "preparationInstructions": "1. Preheat oven to 200°C. 2. Season lamb chops with rosemary, thyme, salt, pepper. 3. Sear in hot pan 2 minutes per side. 4. Transfer to oven, bake 8-10 minutes. 5. Cube carrots, beets, parsnips, toss with oil, roast at 200°C for 25 minutes.",
+          "ingredients": [
+            {
+              "ingredientId": 30,
+              "ingredientName": "Lamb Chops",
+              "quantity": 200,
+              "measurementUnit": "g",
+              "calories": 294,
+              "protein": 25.0,
+              "carbs": 0,
+              "fat": 21.0
+            },
+            {
+              "ingredientId": 31,
+              "ingredientName": "Carrots",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 41,
+              "protein": 0.9,
+              "carbs": 10.0,
+              "fat": 0.2
+            },
+            {
+              "ingredientId": 32,
+              "ingredientName": "Beets",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 43,
+              "protein": 1.7,
+              "carbs": 9.6,
+              "fat": 0.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dayOfWeek": 5,
+      "date": "2026-05-23",
+      "targetCalories": 2100,
+      "targetProtein": 90,
+      "targetCarbs": 245,
+      "targetFat": 70,
+      "targetFiber": 30,
+      "targetSugar": 50,
+      "waterGoal": 3000,
+      "aiDailyTips": "Friday: End the work week strong. Focus on nutrition to help with mental clarity and prepare for active recovery on the weekend.",
+      "meals": [
+        {
+          "mealType": "BREAKFAST",
+          "name": "Scrambled Eggs with Whole Wheat Toast",
+          "description": "Classic protein-packed breakfast",
+          "preparationTime": 10,
+          "preparationInstructions": "1. Scramble 3 eggs with butter. 2. Toast 2 slices whole wheat bread. 3. Serve together with fresh orange juice.",
+          "ingredients": [
+            {
+              "ingredientId": 3,
+              "ingredientName": "Eggs",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 233,
+              "protein": 18.5,
+              "carbs": 1.1,
+              "fat": 16.5
+            },
+            {
+              "ingredientId": 2,
+              "ingredientName": "Whole Wheat Bread",
+              "quantity": 60,
+              "measurementUnit": "g",
+              "calories": 160,
+              "protein": 5.5,
+              "carbs": 28.5,
+              "fat": 2.0
+            }
+          ]
+        },
+        {
+          "mealType": "LUNCH",
+          "name": "Grilled Steak with Baked Potato and Green Beans",
+          "description": "Nutrient-dense meal with high iron content",
+          "preparationTime": 45,
+          "preparationInstructions": "1. Season steak, grill 5-6 minutes per side (medium). 2. Bake potato at 200°C for 30 minutes. 3. Steam green beans for 5 minutes. 4. Plate with butter and herbs.",
+          "ingredients": [
+            {
+              "ingredientId": 33,
+              "ingredientName": "Beef Sirloin Steak",
+              "quantity": 180,
+              "measurementUnit": "g",
+              "calories": 274,
+              "protein": 28.0,
+              "carbs": 0,
+              "fat": 17.0
+            },
+            {
+              "ingredientId": 34,
+              "ingredientName": "Potato",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 110,
+              "protein": 2.1,
+              "carbs": 25.0,
+              "fat": 0.1
+            },
+            {
+              "ingredientId": 35,
+              "ingredientName": "Green Beans",
+              "quantity": 120,
+              "measurementUnit": "g",
+              "calories": 31,
+              "protein": 1.8,
+              "carbs": 7.0,
+              "fat": 0.2
+            }
+          ]
+        },
+        {
+          "mealType": "SNACK",
+          "name": "Cottage Cheese with Pineapple",
+          "description": "Protein-rich snack with tropical fruit",
+          "preparationTime": 3,
+          "preparationInstructions": "1. Scoop cottage cheese. 2. Top with fresh pineapple chunks. 3. Enjoy.",
+          "ingredients": [
+            {
+              "ingredientId": 11,
+              "ingredientName": "Cottage Cheese",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 82,
+              "protein": 16.5,
+              "carbs": 2.6,
+              "fat": 0.8
+            },
+            {
+              "ingredientId": 36,
+              "ingredientName": "Pineapple",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 50,
+              "protein": 0.5,
+              "carbs": 13.1,
+              "fat": 0.1
+            }
+          ]
+        },
+        {
+          "mealType": "DINNER",
+          "name": "Chicken Stir-Fry with Brown Rice",
+          "description": "Quick, colorful meal with multiple vegetable servings",
+          "preparationTime": 30,
+          "preparationInstructions": "1. Cut chicken breast into strips, season. 2. Stir-fry in wok with sesame oil 8-10 minutes. 3. Add broccoli, bell pepper, snap peas. 4. Cook 5 more minutes. 5. Serve over brown rice.",
+          "ingredients": [
+            {
+              "ingredientId": 5,
+              "ingredientName": "Chicken Breast",
+              "quantity": 200,
+              "measurementUnit": "g",
+              "calories": 330,
+              "protein": 62.0,
+              "carbs": 0,
+              "fat": 7.2
+            },
+            {
+              "ingredientId": 8,
+              "ingredientName": "Brown Rice",
+              "quantity": 120,
+              "measurementUnit": "g",
+              "calories": 89,
+              "protein": 2.1,
+              "carbs": 18.4,
+              "fat": 0.7
+            },
+            {
+              "ingredientId": 20,
+              "ingredientName": "Broccoli",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 35,
+              "protein": 2.5,
+              "carbs": 6.5,
+              "fat": 0.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dayOfWeek": 6,
+      "date": "2026-05-24",
+      "targetCalories": 2100,
+      "targetProtein": 90,
+      "targetCarbs": 245,
+      "targetFat": 70,
+      "targetFiber": 30,
+      "targetSugar": 50,
+      "waterGoal": 3000,
+      "aiDailyTips": "Saturday: Perfect day for meal prep for the week ahead. Consider lighter activity like yoga or walking. Stay consistent with nutrition.",
+      "meals": [
+        {
+          "mealType": "BREAKFAST",
+          "name": "Oatmeal Smoothie with Almond Butter",
+          "description": "Convenient liquid meal that's travel-friendly",
+          "preparationTime": 8,
+          "preparationInstructions": "1. Blend 50g oats, 1 cup milk, 25g almond butter, banana. 2. Add ice. 3. Blend until smooth. 4. Drink immediately.",
+          "ingredients": [
+            {
+              "ingredientId": 1,
+              "ingredientName": "Oats",
+              "quantity": 50,
+              "measurementUnit": "g",
+              "calories": 190,
+              "protein": 6.7,
+              "carbs": 33.9,
+              "fat": 3.1
+            },
+            {
+              "ingredientId": 10,
+              "ingredientName": "Whole Milk",
+              "quantity": 240,
+              "measurementUnit": "ml",
+              "calories": 161,
+              "protein": 8.2,
+              "carbs": 11.6,
+              "fat": 8.9
+            },
+            {
+              "ingredientId": 18,
+              "ingredientName": "Banana",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 89,
+              "protein": 1.1,
+              "carbs": 22.7,
+              "fat": 0.3
+            }
+          ]
+        },
+        {
+          "mealType": "LUNCH",
+          "name": "Mediterranean Chicken Wrap",
+          "description": "Whole wheat wrap with lean protein and veggies",
+          "preparationTime": 15,
+          "preparationInstructions": "1. Warm whole wheat wrap. 2. Add grilled chicken breast slices. 3. Layer hummus, lettuce, tomato, cucumber, olives. 4. Roll and wrap with foil.",
+          "ingredients": [
+            {
+              "ingredientId": 5,
+              "ingredientName": "Chicken Breast",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 248,
+              "protein": 46.5,
+              "carbs": 0,
+              "fat": 5.4
+            },
+            {
+              "ingredientId": 37,
+              "ingredientName": "Whole Wheat Wrap",
+              "quantity": 1,
+              "measurementUnit": "piece",
+              "calories": 170,
+              "protein": 6.0,
+              "carbs": 34.0,
+              "fat": 2.5
+            },
+            {
+              "ingredientId": 17,
+              "ingredientName": "Lettuce",
+              "quantity": 60,
+              "measurementUnit": "g",
+              "calories": 18,
+              "protein": 1.4,
+              "carbs": 3.5,
+              "fat": 0.2
+            },
+            {
+              "ingredientId": 19,
+              "ingredientName": "Tomato",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 18,
+              "protein": 0.9,
+              "carbs": 3.9,
+              "fat": 0.2
+            }
+          ]
+        },
+        {
+          "mealType": "SNACK",
+          "name": "Yogurt Parfait with Berries",
+          "description": "Refreshing snack with probiotics",
+          "preparationTime": 5,
+          "preparationInstructions": "1. Layer greek yogurt in glass. 2. Add granola. 3. Top with mixed berries. 4. Repeat layer. 5. Enjoy.",
+          "ingredients": [
+            {
+              "ingredientId": 12,
+              "ingredientName": "Greek Yogurt",
+              "quantity": 180,
+              "measurementUnit": "g",
+              "calories": 117,
+              "protein": 17.1,
+              "carbs": 8.3,
+              "fat": 0.4
+            },
+            {
+              "ingredientId": 22,
+              "ingredientName": "Blueberries",
+              "quantity": 75,
+              "measurementUnit": "g",
+              "calories": 43,
+              "protein": 0.5,
+              "carbs": 10.9,
+              "fat": 0.2
+            }
+          ]
+        },
+        {
+          "mealType": "DINNER",
+          "name": "Pork Tenderloin with Sweet Potato and Brussels Sprouts",
+          "description": "Lean protein with roasted vegetables",
+          "preparationTime": 35,
+          "preparationInstructions": "1. Season pork tenderloin, sear in pan 2 minutes per side. 2. Bake at 180°C for 20 minutes. 3. Cube sweet potato, toss with oil, roast 25 minutes. 4. Halve Brussels sprouts, roast 20 minutes. 5. Rest pork 5 minutes before slicing.",
+          "ingredients": [
+            {
+              "ingredientId": 38,
+              "ingredientName": "Pork Tenderloin",
+              "quantity": 180,
+              "measurementUnit": "g",
+              "calories": 208,
+              "protein": 27.3,
+              "carbs": 0,
+              "fat": 10.2
+            },
+            {
+              "ingredientId": 11,
+              "ingredientName": "Sweet Potato",
+              "quantity": 160,
+              "measurementUnit": "g",
+              "calories": 110,
+              "protein": 1.7,
+              "carbs": 25.2,
+              "fat": 0.1
+            },
+            {
+              "ingredientId": 39,
+              "ingredientName": "Brussels Sprouts",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 54,
+              "protein": 3.7,
+              "carbs": 11.2,
+              "fat": 0.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dayOfWeek": 7,
+      "date": "2026-05-25",
+      "targetCalories": 2100,
+      "targetProtein": 90,
+      "targetCarbs": 245,
+      "targetFat": 70,
+      "targetFiber": 30,
+      "targetSugar": 50,
+      "waterGoal": 3000,
+      "aiDailyTips": "Sunday: Recovery day. Focus on hydration, relaxation, and meal prep for the coming week. Reflect on your progress this week and plan adjustments if needed.",
+      "meals": [
+        {
+          "mealType": "BREAKFAST",
+          "name": "French Toast with Berries",
+          "description": "Weekend treat that fits your macros",
+          "preparationTime": 15,
+          "preparationInstructions": "1. Mix 2 eggs with milk, vanilla, cinnamon. 2. Dip whole wheat bread slices. 3. Cook on buttered pan until golden (3 minutes per side). 4. Top with berries and light syrup.",
+          "ingredients": [
+            {
+              "ingredientId": 3,
+              "ingredientName": "Eggs",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 155,
+              "protein": 12.3,
+              "carbs": 0.7,
+              "fat": 11.0
+            },
+            {
+              "ingredientId": 2,
+              "ingredientName": "Whole Wheat Bread",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 213,
+              "protein": 7.3,
+              "carbs": 38.0,
+              "fat": 2.7
+            },
+            {
+              "ingredientId": 22,
+              "ingredientName": "Blueberries",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 57,
+              "protein": 0.7,
+              "carbs": 14.5,
+              "fat": 0.3
+            }
+          ]
+        },
+        {
+          "mealType": "LUNCH",
+          "name": "Shrimp and Pasta Primavera",
+          "description": "Light but satisfying lunch with seafood",
+          "preparationTime": 25,
+          "preparationInstructions": "1. Cook pasta al dente. 2. Sauté shrimp with garlic, white wine 4-5 minutes. 3. Add cherry tomatoes, zucchini, asparagus. 4. Toss with pasta, olive oil, and herbs.",
+          "ingredients": [
+            {
+              "ingredientId": 40,
+              "ingredientName": "Shrimp",
+              "quantity": 150,
+              "measurementUnit": "g",
+              "calories": 99,
+              "protein": 24.0,
+              "carbs": 0.2,
+              "fat": 0.3
+            },
+            {
+              "ingredientId": 41,
+              "ingredientName": "Whole Wheat Pasta",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 266,
+              "protein": 8.0,
+              "carbs": 48.0,
+              "fat": 1.2
+            },
+            {
+              "ingredientId": 27,
+              "ingredientName": "Bell Pepper",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 25,
+              "protein": 0.8,
+              "carbs": 5.9,
+              "fat": 0.2
+            },
+            {
+              "ingredientId": 25,
+              "ingredientName": "Olive Oil",
+              "quantity": 10,
+              "measurementUnit": "ml",
+              "calories": 88,
+              "protein": 0,
+              "carbs": 0,
+              "fat": 10.0
+            }
+          ]
+        },
+        {
+          "mealType": "SNACK",
+          "name": "String Cheese with Whole Grain Crackers",
+          "description": "Quick protein and carb snack",
+          "preparationTime": 2,
+          "preparationInstructions": "1. Grab string cheese. 2. Portion whole grain crackers. 3. Enjoy together.",
+          "ingredients": [
+            {
+              "ingredientId": 42,
+              "ingredientName": "String Cheese",
+              "quantity": 28,
+              "measurementUnit": "g",
+              "calories": 80,
+              "protein": 7.0,
+              "carbs": 1.0,
+              "fat": 6.0
+            },
+            {
+              "ingredientId": 43,
+              "ingredientName": "Whole Grain Crackers",
+              "quantity": 30,
+              "measurementUnit": "g",
+              "calories": 119,
+              "protein": 3.0,
+              "carbs": 21.0,
+              "fat": 2.5
+            }
+          ]
+        },
+        {
+          "mealType": "DINNER",
+          "name": "Duck Breast with Wild Rice and Seasonal Vegetables",
+          "description": "Premium dinner to celebrate the week",
+          "preparationTime": 40,
+          "preparationInstructions": "1. Score duck skin, season well. 2. Place skin-side down in pan, cook 8-10 minutes until skin is crispy. 3. Flip, cook 5-6 minutes more (medium-rare). 4. Rest 5 minutes. 5. Cook wild rice per package. 6. Roast mixed vegetables (beets, carrots, parsnips) at 200°C for 25 minutes.",
+          "ingredients": [
+            {
+              "ingredientId": 44,
+              "ingredientName": "Duck Breast",
+              "quantity": 180,
+              "measurementUnit": "g",
+              "calories": 337,
+              "protein": 28.5,
+              "carbs": 0,
+              "fat": 25.0
+            },
+            {
+              "ingredientId": 45,
+              "ingredientName": "Wild Rice",
+              "quantity": 100,
+              "measurementUnit": "g",
+              "calories": 357,
+              "protein": 14.0,
+              "carbs": 63.0,
+              "fat": 1.0
+            },
+            {
+              "ingredientId": 31,
+              "ingredientName": "Carrots",
+              "quantity": 80,
+              "measurementUnit": "g",
+              "calories": 33,
+              "protein": 0.7,
+              "carbs": 8.0,
+              "fat": 0.2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

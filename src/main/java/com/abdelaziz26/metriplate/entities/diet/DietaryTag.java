@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.entities.diet;
 
-import com.abdelaziz26.metriplate.enums.DietaryTagType;
+import com.abdelaziz26.metriplate.enums.diet.DietaryTagType;
 import jakarta.persistence.*;
 import lombok.*;
 

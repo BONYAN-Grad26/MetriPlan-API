@@ -1,9 +1,9 @@
 package com.abdelaziz26.metriplate.entities.user;
 
-import com.abdelaziz26.metriplate.enums.ActivityLevel;
-import com.abdelaziz26.metriplate.enums.DietGoal;
-import com.abdelaziz26.metriplate.enums.DietType;
-import com.abdelaziz26.metriplate.enums.Gender;
+import com.abdelaziz26.metriplate.enums.user.ActivityLevel;
+import com.abdelaziz26.metriplate.enums.diet.DietGoal;
+import com.abdelaziz26.metriplate.enums.diet.DietType;
+import com.abdelaziz26.metriplate.enums.user.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 

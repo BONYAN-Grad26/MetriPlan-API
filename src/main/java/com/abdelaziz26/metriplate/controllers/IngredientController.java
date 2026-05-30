@@ -4,7 +4,7 @@ import com.abdelaziz26.metriplate.dtos.ingredients.CreateIngredientDto;
 import com.abdelaziz26.metriplate.dtos.ingredients.IngredientDto;
 import com.abdelaziz26.metriplate.dtos.ingredients.ReadIngredientDto;
 import com.abdelaziz26.metriplate.dtos.ingredients.UpdateIngredientDto;
-import com.abdelaziz26.metriplate.enums.DietaryTagType;
+import com.abdelaziz26.metriplate.enums.diet.DietaryTagType;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.services.ingredient.IngredientService;

@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
 
-
     @Override
     public Result<AuthResponse, Error> login(LoginDto loginDto, HttpServletResponse response) throws AuthenticationException {
         Optional<User> user = userRepository.findByEmail(loginDto.getEmail());

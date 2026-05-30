@@ -10,7 +10,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.security.SecurityContextService;
-import com.abdelaziz26.metriplate.utils.mappers.AllergyMapper;
+import com.abdelaziz26.metriplate.mappers.AllergyMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

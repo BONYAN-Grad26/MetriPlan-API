@@ -10,12 +10,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class MealDTO {
+    // Optional id (used when mapping to existing Meal entity)
+    private Long id;
 
     private String name;
     private String mealType;
     private String description;
     private Integer preparationTime;
     private String preparationInstructions;
+
+    // Order of the meal within the day (1..n)
+    private Integer order;
 
     private List<IngredientDTO> ingredients;
 }

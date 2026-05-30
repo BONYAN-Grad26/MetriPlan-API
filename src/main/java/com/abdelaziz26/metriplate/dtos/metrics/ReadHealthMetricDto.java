@@ -1,14 +1,10 @@
 package com.abdelaziz26.metriplate.dtos.metrics;
 
-import com.abdelaziz26.metriplate.dtos.allergy.ReadAllergyDto;
-import com.abdelaziz26.metriplate.enums.ActivityLevel;
-import com.abdelaziz26.metriplate.enums.DietGoal;
-import com.abdelaziz26.metriplate.enums.DietType;
-import com.abdelaziz26.metriplate.enums.Gender;
+import com.abdelaziz26.metriplate.enums.user.ActivityLevel;
+import com.abdelaziz26.metriplate.enums.diet.DietGoal;
+import com.abdelaziz26.metriplate.enums.diet.DietType;
+import com.abdelaziz26.metriplate.enums.user.Gender;
 import lombok.*;
-
-import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor

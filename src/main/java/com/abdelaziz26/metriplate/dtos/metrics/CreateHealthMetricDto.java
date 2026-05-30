@@ -1,12 +1,11 @@
 package com.abdelaziz26.metriplate.dtos.metrics;
 
-import com.abdelaziz26.metriplate.enums.*;
-import com.abdelaziz26.metriplate.utils.annotations.ValidateEnumValue;
+import com.abdelaziz26.metriplate.enums.diet.DietGoal;
+import com.abdelaziz26.metriplate.enums.diet.DietType;
+import com.abdelaziz26.metriplate.enums.user.ActivityLevel;
+import com.abdelaziz26.metriplate.enums.user.Gender;
 import jakarta.validation.constraints.*;
 import lombok.*;
-
-import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor @AllArgsConstructor
 @Getter

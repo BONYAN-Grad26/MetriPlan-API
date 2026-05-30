@@ -12,5 +12,5 @@ public interface DailyPlanRepository extends JpaRepository<DailyPlan, Long> {
     List<DailyPlan> findByWeeklyPlanIdOrderByDate(Long weeklyPlanId);
 
     // handy for "today's plan" lookups later
-    Optional<DailyPlan> findByWeeklyPlan_DietPlan_User_IdAndDate(Long userId, LocalDate date);
+    Optional<DailyPlan> findByWeeklyPlan_User_IdAndDate(Long userId, LocalDate date);
 }

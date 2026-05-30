@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.entities.diet;
 
-import com.abdelaziz26.metriplate.enums.DayStatus;
+import com.abdelaziz26.metriplate.enums.workout.DayStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

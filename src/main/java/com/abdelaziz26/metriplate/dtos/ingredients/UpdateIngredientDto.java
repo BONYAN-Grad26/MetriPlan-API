@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.dtos.ingredients;
 
-import com.abdelaziz26.metriplate.enums.IngredientCategory;
+import com.abdelaziz26.metriplate.enums.diet.IngredientCategory;
 import com.abdelaziz26.metriplate.utils.annotations.ValidateEnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

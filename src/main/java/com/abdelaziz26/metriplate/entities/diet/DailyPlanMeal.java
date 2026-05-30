@@ -25,7 +25,7 @@ public class DailyPlanMeal {
     @JoinColumn(name = "daily_plan_id")
     private DailyPlan dailyPlan;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "meal_id")
     private Meal meal;
 }

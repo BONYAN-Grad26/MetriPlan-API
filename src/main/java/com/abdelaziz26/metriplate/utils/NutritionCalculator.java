@@ -1,9 +1,9 @@
 package com.abdelaziz26.metriplate.utils;
 
 import com.abdelaziz26.metriplate.dtos.metrics.NutritionCalcResult;
-import com.abdelaziz26.metriplate.enums.ActivityLevel;
-import com.abdelaziz26.metriplate.enums.DietGoal;
-import com.abdelaziz26.metriplate.enums.Gender;
+import com.abdelaziz26.metriplate.enums.user.ActivityLevel;
+import com.abdelaziz26.metriplate.enums.diet.DietGoal;
+import com.abdelaziz26.metriplate.enums.user.Gender;
 
 
 public final class NutritionCalculator {

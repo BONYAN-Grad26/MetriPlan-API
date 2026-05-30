@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.entities.diet;
 
-import com.abdelaziz26.metriplate.enums.MealType;
+import com.abdelaziz26.metriplate.enums.diet.MealType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

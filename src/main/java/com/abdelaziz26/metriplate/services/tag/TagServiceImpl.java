@@ -9,7 +9,7 @@ import com.abdelaziz26.metriplate.repositories.TagRepository;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
-import com.abdelaziz26.metriplate.utils.mappers.DietTagMapper;
+import com.abdelaziz26.metriplate.mappers.DietTagMapper;
 import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

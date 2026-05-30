@@ -2,7 +2,7 @@ package com.abdelaziz26.metriplate.utils.specifications;
 
 import com.abdelaziz26.metriplate.entities.diet.DietaryTag;
 import com.abdelaziz26.metriplate.entities.diet.Ingredient;
-import com.abdelaziz26.metriplate.enums.DietaryTagType;
+import com.abdelaziz26.metriplate.enums.diet.DietaryTagType;
 import jakarta.persistence.criteria.Join;
 import org.springframework.data.jpa.domain.Specification;
 

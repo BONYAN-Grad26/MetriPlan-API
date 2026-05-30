@@ -1,6 +1,6 @@
 package com.abdelaziz26.metriplate.dtos.goal;
 
-import com.abdelaziz26.metriplate.enums.GoalType;
+import com.abdelaziz26.metriplate.enums.user.GoalType;
 import com.abdelaziz26.metriplate.utils.annotations.ValidateEnumValue;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
