@@ -7,6 +7,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.services.workout.WorkoutService;
 import com.abdelaziz26.metriplate.services.workout.WorkoutServiceImpl;
 import com.abdelaziz26.metriplate.utils._Abdel3zizController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +21,10 @@ import java.util.List;
 @RequestMapping("/workout-plan")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Tag(
+        name = "06. Workout-Plan",
+        description = "Workout Plans (Weekly Generations, Weekly & Daily Retrievals) endpoints"
+)
 public class WorkoutPlanController extends _Abdel3zizController {
     WorkoutService workoutService;
 

@@ -8,6 +8,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.services.tag.TagService;
 import com.abdelaziz26.metriplate.utils._Abdel3zizController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +20,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tags")
 @RequiredArgsConstructor
+@Tag(
+        name = "04. Dietary-Tags",
+        description = "Dietary-Tags CRUD endpoints"
+)
 public class TagController extends _Abdel3zizController {
 
     private final TagService tagService;

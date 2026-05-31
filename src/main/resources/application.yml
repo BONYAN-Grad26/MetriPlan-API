@@ -26,3 +26,8 @@ spring:
   jackson:
     mapper:
       accept-case-insensitive-enums: true
+
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha
