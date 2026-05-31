@@ -7,6 +7,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.services.healthMetrics.MetricsService;
 import com.abdelaziz26.metriplate.utils._Abdel3zizController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -16,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/health-profile")
 @RequiredArgsConstructor
+@Tag(
+        name = "02. HealthProfile",
+        description = "Health-Metrics endpoints"
+)
 public class HealthProfileController extends _Abdel3zizController {
     private final MetricsService metricsService;
 

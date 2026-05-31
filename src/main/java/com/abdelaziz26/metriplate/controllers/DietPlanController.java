@@ -6,6 +6,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.services.dietPlan.DietPlanService;
 import com.abdelaziz26.metriplate.utils._Abdel3zizController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/diet-plan")
 @RequiredArgsConstructor
+@Tag(
+        name = "05. Diet-Plan",
+        description = "Diet Plans (Weekly Generations, Weekly & Daily Retrievals) endpoints"
+)
 public class DietPlanController extends _Abdel3zizController {
 
 	private final DietPlanService dietPlanService;

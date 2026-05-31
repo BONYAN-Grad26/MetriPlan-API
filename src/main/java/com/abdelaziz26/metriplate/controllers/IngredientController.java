@@ -9,6 +9,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.services.ingredient.IngredientService;
 import com.abdelaziz26.metriplate.utils._Abdel3zizController;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/ingredients")
 @RequiredArgsConstructor
+@Tag(
+        name = "03. Ingredients",
+        description = "Ingredients Crud Operations endpoints"
+)
 public class IngredientController extends _Abdel3zizController {
     private final IngredientService ingredientService;
 
