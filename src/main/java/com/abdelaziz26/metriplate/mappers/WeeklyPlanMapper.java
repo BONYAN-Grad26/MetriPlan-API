@@ -118,10 +118,10 @@ public class WeeklyPlanMapper {
         dto.setIngredientName(ing != null ? ing.getName() : null);
         dto.setQuantity(entity.getQuantity());
         dto.setMeasurementUnit(entity.getMeasurementUnit());
-        dto.setCalories(entity.getCalories());
-        dto.setProtein(entity.getProtein());
-        dto.setCarbs(entity.getCarbs());
-        dto.setFat(entity.getFat());
+        //dto.setCalories(entity.getCalories());
+        //dto.setProtein(entity.getProtein());
+        //dto.setCarbs(entity.getCarbs());
+        //dto.setFat(entity.getFat());
 
         return dto;
     }
@@ -271,10 +271,10 @@ public class WeeklyPlanMapper {
                 .ingredient(ingredient)
                 .quantity(dto.getQuantity())
                 .measurementUnit(dto.getMeasurementUnit())
-                .calories(dto.getCalories())
-                .protein(dto.getProtein())
-                .carbs(dto.getCarbs())
-                .fat(dto.getFat())
+                //.calories(dto.getCalories())
+                //.protein(dto.getProtein())
+                //.carbs(dto.getCarbs())
+                //.fat(dto.getFat())
                 .build();
     }
 

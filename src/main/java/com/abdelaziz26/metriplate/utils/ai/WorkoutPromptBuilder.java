@@ -23,40 +23,51 @@ public class WorkoutPromptBuilder {
             template = new String(is.readAllBytes(), StandardCharsets.UTF_8);
         }
 
-        // Replace all placeholders
-        String prompt = template
+        return template
+
                 // User Profile
-                .replace("{{userAge}}", String.valueOf(metrics.getAge()))
-                .replace("{{userGender}}", metrics.getGender().name())
-                .replace("{{userWeight}}", String.valueOf(metrics.getWeightKg()))
-                .replace("{{userHeight}}", String.valueOf(metrics.getHeightCm()))
+                .replace("{{userAge}}", safe(metrics.getAge()))
+                .replace("{{userGender}}", enumSafe(metrics.getGender()))
+                .replace("{{userWeight}}", safe(metrics.getWeightKg()))
+                .replace("{{userHeight}}", safe(metrics.getHeightCm()))
 
                 // Body Composition
-                .replace("{{muscleMass}}",
-                        metrics.getMuscleMassKg() != null ? String.valueOf(metrics.getMuscleMassKg()) : "Not provided")
-                .replace("{{bodyFatPercentage}}",
-                        metrics.getFatPercentage() != null ? String.valueOf(metrics.getFatPercentage()) : "Not provided")
-                .replace("{{fatMass}}",
-                        metrics.getFatMass() != null ? String.valueOf(metrics.getFatMass()) : "Not provided")
-                .replace("{{leanMass}}",
-                        metrics.getLeanMass() != null ? String.valueOf(metrics.getLeanMass()) : "Not provided")
-                .replace("{{bodyFatCategory}}",
-                        metrics.getBodyFatCategory() != null ? metrics.getBodyFatCategory() : "Not provided")
+                .replace("{{muscleMass}}", safe(metrics.getMuscleMassKg()))
+                .replace("{{bodyFatPercentage}}", safe(metrics.getFatPercentage()))
+                .replace("{{fatMass}}", safe(metrics.getFatMass()))
+                .replace("{{leanMass}}", safe(metrics.getLeanMass()))
+                .replace("{{bodyFatCategory}}", safe(metrics.getBodyFatCategory()))
 
                 // Metabolic
-                .replace("{{bmi}}", String.valueOf(metrics.getBmi()))
-                .replace("{{bmiCategory}}", metrics.getBmiCategory())
-                .replace("{{tdee}}", String.valueOf(metrics.getTdee()))
+                .replace("{{bmi}}", safe(metrics.getBmi()))
+                .replace("{{bmiCategory}}", safe(metrics.getBmiCategory()))
+                .replace("{{tdee}}", safe(metrics.getTdee()))
 
                 // Goals & Preferences
-                .replace("{{dietGoal}}", metrics.getDietGoal().name())
-                .replace("{{activityLevel}}", metrics.getActivityLevel().name())
+                .replace("{{dietGoal}}",
+                        metrics.getDietGoal() != null
+                                ? metrics.getDietGoal().name()
+                                : "Not provided")
+                .replace("{{activityLevel}}",
+                        metrics.getActivityLevel() != null
+                                ? metrics.getActivityLevel().name()
+                                : "Not provided")
                 .replace("{{targetWeight}}",
-                        metrics.getTargetWeightKg() != null ? String.valueOf(metrics.getTargetWeightKg()) : "Not set")
+                        metrics.getTargetWeightKg() != null
+                                ? metrics.getTargetWeightKg().toString()
+                                : "Not set")
                 .replace("{{medicalNotes}}",
-                        metrics.getMedicalNotes() != null ? metrics.getMedicalNotes() : "None");
+                        metrics.getMedicalNotes() != null
+                                ? metrics.getMedicalNotes()
+                                : "None");
 
-        return prompt;
+    }
+
+    private String safe(Object value) {
+        return value == null ? "" : value.toString();
+    }
+    private String enumSafe(Enum<?> value) {
+        return value == null ? "Not provided" : value.name();
     }
 }
 

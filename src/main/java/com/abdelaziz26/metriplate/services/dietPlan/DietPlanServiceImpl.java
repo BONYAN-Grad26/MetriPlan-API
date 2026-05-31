@@ -35,6 +35,7 @@ import com.abdelaziz26.metriplate.entities.diet.WeeklyPlan;
 import com.abdelaziz26.metriplate.repositories.DietWeeklyPlanRepository;
 import com.abdelaziz26.metriplate.repositories.DailyPlanRepository;
 import com.abdelaziz26.metriplate.dtos.plan.DayDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -54,38 +55,32 @@ public class DietPlanServiceImpl implements DietPlanService{
     DailyPlanRepository             dailyPlanRepository;
     DietPlanRepoOrchestrator        repoOrchestrator;
 
-    public Result<WeekDTO, Error> generateWeeklyPlan(LocalDate startDate, int weekNumber) {
-        try {
-            User user = contextService.getCurrentUser().orElse(null);
-            if(user == null) {
-                return Result.CreateErrorResult(Errors.UnauthorizedErr("User not authenticated"));
-            }
-
-            HealthMetrics metrics = metricsRepository.findByUser_Id(user.getId())
-                    .orElseThrow(() -> new PlanGenerationException("Health metrics not found for user: " + user.getId()));
-
-            List<Ingredient> availableIngredients = ingredientRepository.findAll();
-            List<Allergy> userAllergies = allergyRepository.findByUserId(user.getId());
-
-            String prompt = promptBuilder.buildPrompt(metrics, availableIngredients, userAllergies, startDate, weekNumber);
-
-            String llmResponse = llmClient.generateContent(prompt);
-
-            log.info("LLM Response: {}", llmResponse);
-
-            WeekDTO weekDto = dietJsonParser.parseWeeklyPlanResponse(llmResponse, startDate, weekNumber);
-
-            log.info("Parsed WeekDTO: {}", weekDto);
-
-            WeeklyPlan wp = repoOrchestrator.saveWeeklyPlan(weekDto);
-
-            return Result.CreateSuccessResult(weeklyPlanMapper.toDto(wp));
-
-        } catch (IOException e) {
-            return Result.CreateErrorResult(Errors.InternalServerErr("Failed to parse LLM response: " + e.getMessage()));
-        } catch (Exception e) {
-            return Result.CreateErrorResult(Errors.InternalServerErr("Plan generation failed: " + e.getMessage()));
+    //@Transactional(readOnly = true)
+    public Result<WeekDTO, Error> generateWeeklyPlan(LocalDate startDate, int weekNumber) throws Exception {
+        User user = contextService.getCurrentUser().orElse(null);
+        if(user == null) {
+            return Result.CreateErrorResult(Errors.UnauthorizedErr("User not authenticated"));
         }
+
+        HealthMetrics metrics = metricsRepository.findByUser_Id(user.getId())
+                .orElseThrow(() -> new PlanGenerationException("Health metrics not found for user: " + user.getId()));
+
+        List<Ingredient> availableIngredients = ingredientRepository.findAll();
+        List<Allergy> userAllergies = allergyRepository.findByUserId(user.getId());
+
+        String prompt = promptBuilder.buildPrompt(metrics, availableIngredients, userAllergies, startDate, weekNumber);
+
+        String llmResponse = llmClient.generateContent(prompt);
+
+        log.info("LLM Response: {}", llmResponse);
+
+        WeekDTO weekDto = dietJsonParser.parseWeeklyPlanResponse(llmResponse, startDate, weekNumber);
+
+        log.info("Parsed WeekDTO: {}", weekDto);
+
+        WeeklyPlan wp = repoOrchestrator.saveWeeklyPlan(weekDto, user);
+
+        return Result.CreateSuccessResult(weeklyPlanMapper.toDto(wp));
     }
 
     public Result<List<WeekDTO>, Error> getWeeklyPlansByUserId() {

@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -21,100 +18,97 @@ public class WorkoutJsonParser {
 
     private final ObjectMapper objectMapper;
 
-    public WorkoutPlanResponseDto parseWorkoutPlanResponse(String jsonResponse)
-            throws IOException, PlanGenerationException {
+    public WorkoutPlanResponseDto parseWorkoutPlanResponse(String json) throws Exception {
+        String cleanJson = stripMarkdownFences(json);
+        JsonNode root = objectMapper.readTree(cleanJson);
 
-        JsonNode rootNode = objectMapper.readTree(jsonResponse);
-
-        if (rootNode.has("error")) {
-            throw new PlanGenerationException("LLM returned error: " + rootNode.get("reason").asText());
+        if (root.has("error")) {
+            throw new IllegalStateException("LLM returned error: " + root.path("error").asText());
         }
 
-        WorkoutPlanResponseDto planDto = new WorkoutPlanResponseDto();
+        WorkoutPlanResponseDto plan = new WorkoutPlanResponseDto();
+        plan.setPlan_name(root.path("plan_name").asText());
+        plan.setSplit_type(root.path("split_type").asText());
+        plan.setSplit_reasoning(root.path("split_reasoning").asText());
+        plan.setWeekly_schedule(buildWeeklySchedule(root.path("weekly_schedule")));
 
-        if (rootNode.has("plan_name")) {
-            planDto.setPlan_name(rootNode.get("plan_name").asText());
-        }
-
-        if (rootNode.has("split_type")) {
-            planDto.setSplit_type(rootNode.get("split_type").asText());
-        }
-
-        if (rootNode.has("split_reasoning")) {
-            planDto.setSplit_reasoning(rootNode.get("split_reasoning").asText());
-        }
-
-        // Parse weekly schedule
-        Map<String, WorkoutDayDto> weeklySchedule = new HashMap<>();
-        JsonNode scheduleNode = rootNode.get("weekly_schedule");
-        if (scheduleNode != null && scheduleNode.isObject()) {
-            var iterator = scheduleNode.fields();
-            while (iterator.hasNext()) {
-                var entry = iterator.next();
-                try {
-                    String day = entry.getKey();
-                    JsonNode dayNode = entry.getValue();
-                    WorkoutDayDto dayDto = parseWorkoutDay(dayNode);
-                    weeklySchedule.put(day, dayDto);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        planDto.setWeekly_schedule(weeklySchedule);
-
-        return planDto;
+        return plan;
     }
 
-    public WorkoutDayDto parseWorkoutDay(JsonNode dayNode) throws IOException {
-        WorkoutDayDto dayDto = new WorkoutDayDto();
+    // -------------------------------------------------------------------------
+    // Weekly Schedule
+    // -------------------------------------------------------------------------
 
-        if (dayNode.has("session")) {
-            dayDto.setSession(dayNode.get("session").asText());
+    private Map<String, WorkoutDayDto> buildWeeklySchedule(JsonNode scheduleNode) {
+        Map<String, WorkoutDayDto> schedule = new LinkedHashMap<>(); // LinkedHashMap to preserve day order
+
+        if (scheduleNode.isMissingNode() || !scheduleNode.isObject()) {
+            return schedule;
         }
 
-        if (dayNode.has("focus")) {
-            dayDto.setFocus(dayNode.get("focus").asText());
-        }
+        scheduleNode.fields().forEachRemaining(entry ->
+                schedule.put(entry.getKey(), buildWorkoutDayDto(entry.getValue()))
+        );
 
-        // Parse exercises
+        return schedule;
+    }
+
+    // -------------------------------------------------------------------------
+    // Day
+    // -------------------------------------------------------------------------
+
+    private WorkoutDayDto buildWorkoutDayDto(JsonNode dayNode) {
+        WorkoutDayDto day = new WorkoutDayDto();
+
+        day.setSession(dayNode.path("session").asText());
+        day.setFocus(dayNode.path("focus").asText());
+        day.setExercises(buildExercises(dayNode.path("exercises")));
+
+        return day;
+    }
+
+    // -------------------------------------------------------------------------
+    // Exercises
+    // -------------------------------------------------------------------------
+
+    private List<ExerciseDto> buildExercises(JsonNode exercisesNode) {
         List<ExerciseDto> exercises = new ArrayList<>();
-        JsonNode exercisesNode = dayNode.get("exercises");
-        if (exercisesNode != null && exercisesNode.isArray()) {
-            for (JsonNode exerciseNode : exercisesNode) {
-                ExerciseDto exerciseDto = parseExercise(exerciseNode);
-                exercises.add(exerciseDto);
-            }
-        }
-        dayDto.setExercises(exercises);
 
-        return dayDto;
+        if (exercisesNode.isMissingNode() || !exercisesNode.isArray()) {
+            return exercises;
+        }
+
+        for (JsonNode exNode : exercisesNode) {
+            exercises.add(buildExerciseDto(exNode));
+        }
+
+        return exercises;
     }
 
-    public ExerciseDto parseExercise(JsonNode exerciseNode) {
-        ExerciseDto exerciseDto = new ExerciseDto();
+    private ExerciseDto buildExerciseDto(JsonNode exNode) {
+        ExerciseDto exercise = new ExerciseDto();
 
-        if (exerciseNode.has("name")) {
-            exerciseDto.setName(exerciseNode.get("name").asText());
+        exercise.setName(exNode.path("name").asText());
+        exercise.setSets(exNode.path("sets").asInt());
+        exercise.setReps(exNode.path("reps").asText());       // String لأن ممكن يبعت "8-12" أو "failure"
+        exercise.setRest_seconds(exNode.path("rest_seconds").asInt());
+        exercise.setNotes(exNode.path("notes").asText());
+
+        return exercise;
+    }
+
+    // -------------------------------------------------------------------------
+    // Markdown fence stripping (safety net)
+    // -------------------------------------------------------------------------
+
+    private String stripMarkdownFences(String raw) {
+        if (raw == null) return "";
+        String stripped = raw.strip();
+        if (stripped.startsWith("```")) {
+            stripped = stripped.replaceFirst("^```(?:json)?\\s*", "");
+            stripped = stripped.replaceFirst("\\s*```$", "");
         }
-
-        if (exerciseNode.has("sets")) {
-            exerciseDto.setSets(exerciseNode.get("sets").asInt());
-        }
-
-        if (exerciseNode.has("reps")) {
-            exerciseDto.setReps(exerciseNode.get("reps").asText());
-        }
-
-        if (exerciseNode.has("rest_seconds")) {
-            exerciseDto.setRest_seconds(exerciseNode.get("rest_seconds").asInt());
-        }
-
-        if (exerciseNode.has("notes")) {
-            exerciseDto.setNotes(exerciseNode.get("notes").asText());
-        }
-
-        return exerciseDto;
+        return stripped.strip();
     }
 }
 

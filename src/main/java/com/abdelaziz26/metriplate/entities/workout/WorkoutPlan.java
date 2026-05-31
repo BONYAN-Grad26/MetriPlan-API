@@ -22,6 +22,8 @@ public class WorkoutPlan {
 
     private String planName;
     private String splitType;
+
+    //@Lob
     private String splitReasoning;
 
     @ManyToOne

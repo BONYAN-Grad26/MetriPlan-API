@@ -26,10 +26,10 @@ public class IngredientDTO {
     // Measurement unit - must be one of: g, ml, kg, l, cup, tbsp, tsp, piece, oz, lb
     private String measurementUnit;
 
-    // Nutrition values for the provided quantity (optional but useful)
-    private Double calories;
-    private Double protein;
-    private Double carbs;
-    private Double fat;
+    //// Nutrition values for the provided quantity (optional but useful)
+    //private Double calories;
+    //private Double protein;
+    //private Double carbs;
+    //private Double fat;
 
 }

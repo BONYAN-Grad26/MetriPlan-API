@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface DietPlanService {
-    Result<WeekDTO, Error> generateWeeklyPlan(LocalDate startDate, int weekNumber) throws IOException, PlanGenerationException, Exception;
+    Result<WeekDTO, Error> generateWeeklyPlan(LocalDate startDate, int weekNumber) throws Exception;
     Result<List<WeekDTO>, Error> getWeeklyPlansByUserId();
     Result<WeekDTO, Error> getWeeklyPlanById(Long planId);
     Result<WeekDTO, Error> getDailyPlanById(Long planId);

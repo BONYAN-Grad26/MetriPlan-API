@@ -88,10 +88,10 @@ public class DailyPlanMapper {
         ingredientDto.setIngredientName(mealIngredient.getIngredient().getName());
         ingredientDto.setQuantity(mealIngredient.getQuantity());
         ingredientDto.setMeasurementUnit(mealIngredient.getMeasurementUnit());
-        ingredientDto.setCalories(mealIngredient.getCalories());
-        ingredientDto.setProtein(mealIngredient.getProtein());
-        ingredientDto.setCarbs(mealIngredient.getCarbs());
-        ingredientDto.setFat(mealIngredient.getFat());
+        //ingredientDto.setCalories(mealIngredient.getCalories());
+        //ingredientDto.setProtein(mealIngredient.getProtein());
+        //ingredientDto.setCarbs(mealIngredient.getCarbs());
+        //ingredientDto.setFat(mealIngredient.getFat());
         return ingredientDto;
     }
 }

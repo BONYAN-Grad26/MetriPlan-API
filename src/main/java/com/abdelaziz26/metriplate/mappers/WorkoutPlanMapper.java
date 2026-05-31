@@ -100,4 +100,27 @@ public class WorkoutPlanMapper {
         dto.setWeekly_schedule(schedule);
         return dto;
     }
+    
+    public WorkoutDayDto toDayDto(WorkoutDay day) {
+        if (day == null) return null;
+
+        List<ExerciseDto> exercises = (day.getExercises() == null) ?
+                List.of() :
+                day.getExercises()
+                        .stream()
+                        .map(e -> ExerciseDto.builder()
+                                .name(e.getName())
+                                .sets(e.getSets() == null ? 0 : e.getSets())
+                                .reps(e.getReps())
+                                .rest_seconds(e.getRestSeconds() == null ? 0 : e.getRestSeconds())
+                                .notes(e.getNotes())
+                                .build())
+                        .collect(Collectors.toList());
+
+        return WorkoutDayDto.builder()
+                .session(day.getSession())
+                .focus(day.getFocus())
+                .exercises(exercises)
+                .build();
+    } 
 }

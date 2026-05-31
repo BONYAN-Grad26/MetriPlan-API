@@ -178,10 +178,10 @@ public class DietJsonParser {
         ing.setQuantity(ingNode.path("quantity").asDouble());
         ing.setMeasurementUnit(normalizeUnit(ingNode.path("unit").asText()));
 
-        if (ingNode.hasNonNull("calories")) ing.setCalories(ingNode.path("calories").asDouble());
-        if (ingNode.hasNonNull("protein"))  ing.setProtein(ingNode.path("protein").asDouble());
-        if (ingNode.hasNonNull("carbs"))    ing.setCarbs(ingNode.path("carbs").asDouble());
-        if (ingNode.hasNonNull("fat"))      ing.setFat(ingNode.path("fat").asDouble());
+        //if (ingNode.hasNonNull("calories")) ing.setCalories(ingNode.path("calories").asDouble());
+        //if (ingNode.hasNonNull("protein"))  ing.setProtein(ingNode.path("protein").asDouble());
+        //if (ingNode.hasNonNull("carbs"))    ing.setCarbs(ingNode.path("carbs").asDouble());
+        //if (ingNode.hasNonNull("fat"))      ing.setFat(ingNode.path("fat").asDouble());
 
         return ing;
     }
