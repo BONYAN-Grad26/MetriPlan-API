@@ -1,21 +1,21 @@
 services:
-  #metriplate:
-  #  build:
-  #    context: .
-  #    dockerfile: Dockerfile
-  #  container_name: metriplate_container
-  #  ports:
-  #    - '8080:8080'
-  #  networks:
-  #    - metriplate_net
-#
-  #  environment:
-  #    - SPRING_PROFILES_ACTIVE=dev
-  #  env_file:
-  #    - .env
-  #  depends_on:
-  #    postgres:
-  #      condition: service_healthy
+  metriplate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: metriplate_container
+    ports:
+      - '8080:8080'
+    networks:
+      - metriplate_net
+
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres
@@ -30,7 +30,7 @@ services:
     networks:
       - metriplate_net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} || exit 1"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
