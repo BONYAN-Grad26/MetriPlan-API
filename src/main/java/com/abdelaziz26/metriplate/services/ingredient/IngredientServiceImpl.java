@@ -13,6 +13,7 @@ import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
 import com.abdelaziz26.metriplate.mappers.IngredientMapper;
+import com.abdelaziz26.metriplate.services.cloudinary.UploadService;
 import com.abdelaziz26.metriplate.utils.specifications.IngredientSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +36,7 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientRepository ingredientRepository;
     private final IngredientMapper ingredientMapper;
     private final TagRepository tagRepository;
+    private final UploadService uploadService;
 
     @Override
     public Result<ReadIngredientDto, Error> getById(long id) {
@@ -87,13 +91,14 @@ public class IngredientServiceImpl implements IngredientService {
 
 
     @Override
-    public Result<ReadIngredientDto, Error> addIngredient(CreateIngredientDto dto) {
+    public Result<ReadIngredientDto, Error> addIngredient(CreateIngredientDto dto, MultipartFile file) throws IOException {
         boolean exists = ingredientRepository.existsByName(dto.getName());
 
         if(exists) {
             return Result.CreateErrorResult(Errors.BadRequestErr("An ingredient already exists with the name " + dto.getName()));
         }
 
+        dto = CreateIngredientDto.of(dto, uploadService.upload(file));
         List<DietaryTag> dietaryTags = tagRepository.findAllById(dto.getDietaryTagIds());
 
         return Result.CreateSuccessResult( ingredientMapper

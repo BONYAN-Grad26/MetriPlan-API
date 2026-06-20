@@ -15,7 +15,7 @@ public class CreateIngredientDto {
     @NotBlank
     private String name;
 
-    private String imageUrl;
+    private String imageUrl = "";
 
     @ValidateEnumValue(enumClass = IngredientCategory.class)
     @NotBlank
@@ -38,4 +38,25 @@ public class CreateIngredientDto {
     private String unit;
     private Integer stockQuantity;
     private Boolean availableForSale;
+
+    public static CreateIngredientDto of(CreateIngredientDto dto, String imageUrl) {
+        return new CreateIngredientDto(
+                dto.getName(),
+                imageUrl,
+                dto.getCategory(),
+                dto.getCalories(),
+                dto.getProteinG(),
+                dto.getCarbsG(),
+                dto.getFatG(),
+                dto.getFiberG(),
+                dto.getSugarG(),
+                dto.getDietaryTagIds(),
+                dto.getAllergenIds(),
+                dto.getPrice(),
+                dto.getUnit(),
+                dto.getStockQuantity(),
+                dto.getAvailableForSale()
+        );
+    }
+
 }

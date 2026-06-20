@@ -7,7 +7,9 @@ import com.abdelaziz26.metriplate.dtos.ingredients.UpdateIngredientDto;
 import com.abdelaziz26.metriplate.enums.diet.DietaryTagType;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface IngredientService {
@@ -16,7 +18,7 @@ public interface IngredientService {
     Result<List<IngredientDto>, Error> getAll(int pageIdx);
     Result<List<IngredientDto>, Error> getAll(int pageIdx, List<DietaryTagType> dietaryTagTypes);
 
-    Result<ReadIngredientDto, Error> addIngredient(CreateIngredientDto dto);
+    Result<ReadIngredientDto, Error> addIngredient(CreateIngredientDto dto, MultipartFile file) throws IOException;
     Result<ReadIngredientDto, Error> updateIngredient(Long id, UpdateIngredientDto dto);
 
     Result<String, Error> deleteIngredient(Long id);

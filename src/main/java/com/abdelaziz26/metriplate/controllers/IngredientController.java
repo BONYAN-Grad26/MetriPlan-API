@@ -13,9 +13,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -53,9 +56,11 @@ public class IngredientController extends _Abdel3zizController {
         return new ResponseEntity<>(result, resolveStatus(result));
     }
 
-    @PostMapping
-    public ResponseEntity<@NotNull Result<ReadIngredientDto, Error>> addIngredient(@Valid @RequestBody CreateIngredientDto createDto) {
-        Result<ReadIngredientDto, Error> result = ingredientService.addIngredient(createDto);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<@NotNull Result<ReadIngredientDto, Error>> addIngredient(
+            @Valid @RequestPart("createDto") CreateIngredientDto createDto,
+            @RequestPart("file") MultipartFile file) throws IOException {
+        Result<ReadIngredientDto, Error> result = ingredientService.addIngredient(createDto, file);
         return new ResponseEntity<>(result, resolveStatus(result));
     }
 
