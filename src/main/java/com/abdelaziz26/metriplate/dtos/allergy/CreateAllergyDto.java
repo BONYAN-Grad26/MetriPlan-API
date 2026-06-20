@@ -21,6 +21,4 @@ public class CreateAllergyDto {
     @NotBlank
     private String type;
 
-    @NotNull
-    private Long userId;
 }

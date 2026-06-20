@@ -38,6 +38,12 @@ public class AllergyController extends _Abdel3zizController {
         return new ResponseEntity<>(result, resolveStatus(result));
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<@NotNull Result<List<ReadAllergyDto>, Error>> getMyAllergies() {
+        Result<List<ReadAllergyDto>, Error> result = allergyService.getMyAllergies();
+        return new ResponseEntity<>(result, resolveStatus(result));
+    }
+
 
     @PostMapping
     public ResponseEntity<@NotNull Result<ReadAllergyDto, Error>> addAllergy(@Valid @RequestBody CreateAllergyDto createDto) {

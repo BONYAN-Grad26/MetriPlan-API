@@ -17,5 +17,5 @@ public interface AllergyService {
 
     Result<String, Error> deleteAllergy(Long id);
 
-
+    Result<List<ReadAllergyDto>, Error> getMyAllergies();
 }

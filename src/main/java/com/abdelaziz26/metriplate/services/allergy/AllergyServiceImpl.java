@@ -47,6 +47,17 @@ public class AllergyServiceImpl implements AllergyService {
         );
     }
 
+    public Result<List<ReadAllergyDto>, Error> getMyAllergies() {
+        User user = securityContextService.getCurrentUser().orElse(null);
+
+        if (user == null)
+            return Result.CreateErrorResult(
+                    Errors.UnauthorizedErr("User is not authorized - plz Login first")
+            );
+
+        return this.getByUserId(user.getId());
+    }
+
     @Transactional
     @Override
     public Result<ReadAllergyDto, Error> addAllergy(CreateAllergyDto dto) {
@@ -54,7 +65,7 @@ public class AllergyServiceImpl implements AllergyService {
 
         if (user == null)
             return Result.CreateErrorResult(
-                    Errors.NotFoundErr("User Not Found")
+                    Errors.UnauthorizedErr("User is not authorized - plz Login first")
             );
 
         Allergy allergy = allergyMapper.toEntity(dto, user);
