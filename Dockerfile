@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY ./pom.xml .
 
-COPY ./.env .
-
 RUN mvn dependency:go-offline -B
 
 COPY ./src ./src
@@ -17,7 +15,6 @@ FROM eclipse-temurin:17-jre-alpine AS final
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
-COPY --from=build /app/.env .env
 
 EXPOSE 8080
 

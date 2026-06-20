@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: postgresql://neondb_owner:${NEOP_PASSWORD}@ep-odd-sunset-adolvr2e.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require
+    url: ${SPRING_DATASOURCE_URL}
   jpa:
     show-sql: true
     hibernate:

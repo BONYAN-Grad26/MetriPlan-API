@@ -8,8 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MetriPlateApplication {
 
     public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
-        dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+        Dotenv dotenv = Dotenv.configure()
+                .ignoreIfMissing()
+                .load();
+
+        dotenv.entries().forEach(entry ->
+                System.setProperty(entry.getKey(), entry.getValue()));
 
         SpringApplication.run(MetriPlateApplication.class, args);
     }

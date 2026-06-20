@@ -1,9 +1,6 @@
 package com.abdelaziz26.metriplate.services.user;
 
-import com.abdelaziz26.metriplate.dtos.user.AuthResponse;
-import com.abdelaziz26.metriplate.dtos.user.ConfirmEmailDto;
-import com.abdelaziz26.metriplate.dtos.user.LoginDto;
-import com.abdelaziz26.metriplate.dtos.user.RegisterDto;
+import com.abdelaziz26.metriplate.dtos.user.*;
 import com.abdelaziz26.metriplate.entities.user.Role;
 import com.abdelaziz26.metriplate.entities.user.User;
 import com.abdelaziz26.metriplate.repositories.RoleRepository;
@@ -155,6 +152,15 @@ public class UserServiceImpl implements UserService {
         setRefreshTokenInCookie(tokenResponse.getRefreshToken(), response);
 
         return Result.CreateSuccessResult(new AuthResponse(tokenResponse));
+    }
+
+    @Override
+    public Result<UserProfileDto, Error> getUserById(Long id) {
+        return  userRepository.findById(id).map(u ->
+                Result.CreateSuccessResult(UserProfileDto.of(u))
+        ).orElse(
+                Result.CreateErrorResult(Errors.NotFoundErr("User not found"))
+        );
     }
 
     private String generateOtp() {

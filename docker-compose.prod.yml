@@ -1,14 +1,5 @@
 services:
-  game:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: metriplate_container
-    ports:
-      - '8080:8080'
-    networks:
-      - metriplate_net
-
+  metriplate:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     env_file:
