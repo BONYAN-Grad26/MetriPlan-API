@@ -21,4 +21,6 @@ public class CreateAllergyDto {
     @NotBlank
     private String type;
 
+    Long ingredientId;
+
 }

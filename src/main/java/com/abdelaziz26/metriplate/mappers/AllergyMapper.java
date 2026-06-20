@@ -3,6 +3,7 @@ package com.abdelaziz26.metriplate.mappers;
 import com.abdelaziz26.metriplate.dtos.allergy.CreateAllergyDto;
 import com.abdelaziz26.metriplate.dtos.allergy.ReadAllergyDto;
 import com.abdelaziz26.metriplate.dtos.allergy.UpdateAllergyDto;
+import com.abdelaziz26.metriplate.entities.diet.Ingredient;
 import com.abdelaziz26.metriplate.entities.user.Allergy;
 import com.abdelaziz26.metriplate.entities.user.User;
 import com.abdelaziz26.metriplate.enums.user.AllergenType;
@@ -11,12 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class AllergyMapper {
 
-    public Allergy toEntity(CreateAllergyDto dto, User user) {
+    public Allergy toEntity(CreateAllergyDto dto, User user, Ingredient ingredient) {
         Allergy allergy = new Allergy();
         allergy.setName(dto.getName());
         allergy.setDescription(dto.getDescription());
         allergy.setType(AllergenType.valueOf(dto.getType()));
         allergy.setUser(user);
+        allergy.setIngredient(ingredient);
         return allergy;
     }
 

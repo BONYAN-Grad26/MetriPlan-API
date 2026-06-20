@@ -3,9 +3,11 @@ package com.abdelaziz26.metriplate.services.allergy;
 import com.abdelaziz26.metriplate.dtos.allergy.CreateAllergyDto;
 import com.abdelaziz26.metriplate.dtos.allergy.ReadAllergyDto;
 import com.abdelaziz26.metriplate.dtos.allergy.UpdateAllergyDto;
+import com.abdelaziz26.metriplate.entities.diet.Ingredient;
 import com.abdelaziz26.metriplate.entities.user.Allergy;
 import com.abdelaziz26.metriplate.entities.user.User;
 import com.abdelaziz26.metriplate.repositories.AllergyRepository;
+import com.abdelaziz26.metriplate.repositories.IngredientRepository;
 import com.abdelaziz26.metriplate.responses.Result_.Error;
 import com.abdelaziz26.metriplate.responses.Result_.Errors;
 import com.abdelaziz26.metriplate.responses.Result_.Result;
@@ -25,6 +27,7 @@ public class AllergyServiceImpl implements AllergyService {
     private final AllergyRepository allergyRepository;
     private final AllergyMapper allergyMapper;
     private final SecurityContextService securityContextService;
+    private final IngredientRepository ingredientRepository;
 
     @Override
     public Result<ReadAllergyDto, Error> getById(Long id) {
@@ -68,7 +71,15 @@ public class AllergyServiceImpl implements AllergyService {
                     Errors.UnauthorizedErr("User is not authorized - plz Login first")
             );
 
-        Allergy allergy = allergyMapper.toEntity(dto, user);
+        Ingredient ing = ingredientRepository.findById(dto.getIngredientId()).orElse(null);
+
+        if(ing == null) {
+            return Result.CreateErrorResult(
+                    Errors.NotFoundErr("Ingredient is not found")
+            );
+        }
+
+        Allergy allergy = allergyMapper.toEntity(dto, user, ing);
 
         return Result.CreateSuccessResult(
                 allergyMapper.toDto(allergyRepository.save(allergy))
