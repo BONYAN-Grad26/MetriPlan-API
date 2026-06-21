@@ -3,11 +3,13 @@ package com.abdelaziz26.metriplate.services.cloudinary;
 import com.abdelaziz26.metriplate.utils.annotations.FileValidator;
 import com.cloudinary.Cloudinary;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Map;
 
+@Component
 @RequiredArgsConstructor
 public class UploadServiceImpl implements UploadService {
 
