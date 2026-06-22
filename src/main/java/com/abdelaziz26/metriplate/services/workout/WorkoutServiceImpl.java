@@ -87,6 +87,18 @@ public class WorkoutServiceImpl implements WorkoutService {
         return Result.CreateSuccessResult(workoutWeeklyPlanRepository.findByUser_Id(userId).stream().map(workoutPlanMapper::toDto).toList());
     }
 
+    public Result<WorkoutPlanResponseDto, Error> getMyWeeklyPlan() {
+        User user = contextService.getCurrentUser().orElse(null);
+        if (user == null) {
+            return Result.CreateErrorResult(Errors.UnauthorizedErr("User not authenticated"));
+        }
+
+        return Result.CreateSuccessResult(
+                workoutWeeklyPlanRepository.findByUser_IdOrderByIdDesc(user.getId())
+                        .stream().map(workoutPlanMapper::toDto).toList().getLast()
+        );
+    }
+
     public Result<WorkoutDayDto, Error> getTodayPlan() {
         User user = contextService.getCurrentUser().orElse(null);
         if (user == null) {

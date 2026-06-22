@@ -53,6 +53,14 @@ public class WorkoutPlanController extends _Abdel3zizController {
         return ResponseEntity.status(resolveStatus(res)).body(res);
     }
 
+
+    @GetMapping("/user/me")
+    @Transactional(readOnly = true)
+    public ResponseEntity<@NotNull Result<WorkoutPlanResponseDto, Error>> getMyPlan() {
+        Result<WorkoutPlanResponseDto, Error> result = workoutService.getMyWeeklyPlan();
+        return ResponseEntity.status(resolveStatus(result)).body(result);
+    }
+
     @GetMapping("/today")
     @Transactional(readOnly = true)
     public ResponseEntity<@NotNull Result<WorkoutDayDto, Error>> getTodayPlan() {

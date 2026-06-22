@@ -13,4 +13,5 @@ public interface WorkoutService {
     Result<List<WorkoutPlanResponseDto>, Error> getByUserId(Long id);
     Result<WorkoutDayDto, Error> getTodayPlan() ;
     Result<String, Error> deletePlan(Long id) ;
+    Result<WorkoutPlanResponseDto, Error> getMyWeeklyPlan();
 }

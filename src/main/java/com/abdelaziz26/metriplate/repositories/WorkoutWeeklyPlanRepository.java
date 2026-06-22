@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public interface WorkoutWeeklyPlanRepository extends JpaRepository<@NotNull WorkoutPlan, @NotNull Long> {
     List<WorkoutPlan> findByUser_Id(@NotNull Long id);
+    List<WorkoutPlan> findByUser_IdOrderByIdDesc(@NotNull Long id);
     Boolean existsByIdAndUser_Id(@NotNull Long id, @NotNull Long userId);
 
     boolean existsByUser_Id(Long userId);
