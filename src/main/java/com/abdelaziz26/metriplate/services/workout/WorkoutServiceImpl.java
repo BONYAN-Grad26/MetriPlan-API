@@ -43,7 +43,6 @@ public class WorkoutServiceImpl implements WorkoutService {
     WorkoutWeeklyPlanRepository workoutWeeklyPlanRepository;
     WorkoutDayPlanRepository    workoutDayPlanRepository;
 
-    //@Transactional(readOnly = true)
     @Override
     public Result<WorkoutPlanResponseDto, Error> generateWeeklyWorkoutPlan() throws Exception {
         User user = contextService.getCurrentUser().orElse(null);

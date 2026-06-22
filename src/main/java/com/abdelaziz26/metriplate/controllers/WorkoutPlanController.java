@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class WorkoutPlanController extends _Abdel3zizController {
     }
 
     @GetMapping("/{id}")
+    @Transactional(readOnly = true)
     public ResponseEntity<@NotNull Result<WorkoutPlanResponseDto, Error>> getById(
             @PathVariable Long id) {
 
@@ -43,6 +45,7 @@ public class WorkoutPlanController extends _Abdel3zizController {
     }
 
     @GetMapping("/user/{userId}")
+    @Transactional(readOnly = true)
     public ResponseEntity<@NotNull Result<List<WorkoutPlanResponseDto>, Error>> getByUserId(
             @PathVariable Long userId) {
 
@@ -51,6 +54,7 @@ public class WorkoutPlanController extends _Abdel3zizController {
     }
 
     @GetMapping("/today")
+    @Transactional(readOnly = true)
     public ResponseEntity<@NotNull Result<WorkoutDayDto, Error>> getTodayPlan() {
 
         Result<WorkoutDayDto, Error> res = workoutService.getTodayPlan();
