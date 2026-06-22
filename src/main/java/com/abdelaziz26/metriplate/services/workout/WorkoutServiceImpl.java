@@ -47,8 +47,15 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Override
     public Result<WorkoutPlanResponseDto, Error> generateWeeklyWorkoutPlan() throws Exception {
         User user = contextService.getCurrentUser().orElse(null);
+
         if (user == null) {
             return Result.CreateErrorResult(Errors.UnauthorizedErr("User not authenticated"));
+        }
+
+        boolean hasOngoing = workoutWeeklyPlanRepository.existsByUser_Id(user.getId());
+
+        if(hasOngoing) {
+            return Result.CreateErrorResult(Errors.BadRequestErr("You have ongoing plans"));
         }
 
         HealthMetrics metrics = metricsRepository.findByUser_Id(user.getId())
