@@ -116,6 +116,8 @@ public class IngredientMapper {
         IngredientDto dto = new IngredientDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
+        dto.setImageUrl(entity.getImageUrl());
+        dto.setPrice(entity.getPrice());
         return dto;
     }
 }

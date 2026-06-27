@@ -23,7 +23,7 @@ public class WorkoutPlan {
     private String planName;
     private String splitType;
 
-    @Lob
+    @Column(name = "split_reasoning", columnDefinition = "TEXT")
     private String splitReasoning;
 
     @ManyToOne

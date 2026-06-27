@@ -48,11 +48,25 @@ public class SecurityConfig {
                                         "/swagger-ui.html").permitAll()
 
                                 .requestMatchers(HttpMethod.GET, "/api/ingredients/**").permitAll()
+                                .requestMatchers("/api/ingredients/**").hasRole("ADMIN")
 
                                 .requestMatchers(HttpMethod.GET, "/api/tags/**").permitAll()
                                 .requestMatchers("/api/tags/**").hasRole("ADMIN")
 
-                                .requestMatchers("/api/diet-plan/**", "/workout-plan/**", "/api/allergy/**", "/api/health-profile/**").authenticated()
+                                .requestMatchers(
+                                        "/api/diet-plan/**",
+                                        "/api/workout-plan/**",
+                                        "/api/allergy/**",
+                                        "/api/health-profile/**",
+                                        "/api/cart/**"
+                                        ).authenticated()
+
+                                .requestMatchers(
+                                        HttpMethod.PATCH,
+                                        "/api/orders/*/status"
+                                ).hasRole("ADMIN")
+
+                                .requestMatchers("/api/orders/**").authenticated()
 
                 ).csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(AbstractHttpConfigurer::disable)

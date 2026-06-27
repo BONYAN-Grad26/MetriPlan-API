@@ -1,6 +1,8 @@
 package com.abdelaziz26.metriplate.entities.user;
 
 import com.abdelaziz26.metriplate.entities.diet.DietPlan;
+import com.abdelaziz26.metriplate.entities.store.CartItem;
+import com.abdelaziz26.metriplate.entities.store.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -72,6 +74,12 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<RefreshToken> refreshTokens;
+
+    @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
+
+    @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> cartItems;
 
     @Override
     public @NotNull Collection<? extends GrantedAuthority> getAuthorities() {
