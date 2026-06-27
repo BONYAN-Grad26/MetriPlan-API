@@ -20,6 +20,7 @@ public class CartItemResponseDto {
 
     public static CartItemResponseDto from(CartItem item) {
         return CartItemResponseDto.builder()
+                .id(item.getId())
                 .ingredientId(item.getIngredient().getId())
                 .quantity(item.getQuantity())
                 .ingredientName(item.getIngredient().getName())

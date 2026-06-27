@@ -23,4 +23,6 @@ public interface WorkoutWeeklyPlanRepository extends JpaRepository<@NotNull Work
 
     Optional<WorkoutPlan> findFirstByUser_IdOrderByIdDesc(Long userId);
 
+
+
 }

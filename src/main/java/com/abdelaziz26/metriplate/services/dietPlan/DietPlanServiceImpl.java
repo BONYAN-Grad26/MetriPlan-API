@@ -59,13 +59,6 @@ public class DietPlanServiceImpl implements DietPlanService{
     public Result<WeekDTO, Error> generateWeeklyPlan(LocalDate startDate, int weekNumber) throws Exception {
         User user = contextService.getCurrentUser().orElse(null);
 
-        boolean hasOngoingPlans = weeklyPlanRepository.existsByUser_IdAndStartDateBeforeAndEndDateAfter(user.getId(),
-                LocalDate.now(), LocalDate.now());
-
-        if(hasOngoingPlans) {
-            return Result.CreateErrorResult(Errors.BadRequestErr("You have Ongoing Plan"));
-        }
-
         if(user == null) {
             return Result.CreateErrorResult(Errors.UnauthorizedErr("User not authenticated"));
         }
