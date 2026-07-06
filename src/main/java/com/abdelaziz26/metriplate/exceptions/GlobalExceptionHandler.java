@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -64,6 +65,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<@NotNull Result<Object, Error>> handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
         return new ResponseEntity<>(Result.CreateErrorResult(Errors.InternalServerErr(ex.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<@NotNull Result<Object, Error>> handleAuthorizationDeniedException(AuthorizationDeniedException ex) {
+        Result<Object, Error> result = Result.CreateErrorResult(Errors.ForbiddenErr("Access Denied !"));
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN) // 403 Forbidden
+                .body(result);
     }
 
 }

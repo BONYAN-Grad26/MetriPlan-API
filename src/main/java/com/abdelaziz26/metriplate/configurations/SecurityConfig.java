@@ -72,7 +72,8 @@ public class SecurityConfig {
                 .sessionManagement(AbstractHttpConfigurer::disable)
                 .exceptionHandling(ehc ->
                         ehc.authenticationEntryPoint(customAuthenticationEntryPoint)
-                                .accessDeniedHandler(customAccessDeniedHandler));
+                                .accessDeniedHandler(customAccessDeniedHandler)
+                );
 
         http.addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

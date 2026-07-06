@@ -15,11 +15,13 @@ import com.abdelaziz26.metriplate.utils.NutritionCalculator;
 import com.abdelaziz26.metriplate.mappers.MetricsMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Slf4j
 @Service("MetricsService")
 @RequiredArgsConstructor
 public class MetricsServiceImpl implements MetricsService {
@@ -34,6 +36,8 @@ public class MetricsServiceImpl implements MetricsService {
         if(user == null) {
             return false;
         }
+
+        log.info("Checking ownership for metricsId: {} and userId: {}", metricsId, user.getId());
 
         return metricsRepository.existsByIdAndUserId(metricsId, user.getId());
     }
@@ -95,11 +99,11 @@ public class MetricsServiceImpl implements MetricsService {
     }
 
     @Transactional
-    @PreAuthorize("@MetricsService.isOwner(#metricId)")
+    @PreAuthorize("@MetricsService.isOwner(#metricsId)")
     @Override
-    public Result<ReadHealthMetricDto, Error> updateHealthMetrics(Long metricId, UpdateHealthMetricDto dto) {
+    public Result<ReadHealthMetricDto, Error> updateHealthMetrics(Long metricsId, UpdateHealthMetricDto dto) {
 
-        Optional<HealthMetrics> metrics = metricsRepository.findById(metricId);
+        Optional<HealthMetrics> metrics = metricsRepository.findById(metricsId);
 
         if(metrics.isEmpty()) {
             return Result.CreateErrorResult(Errors.NotFoundErr("No HealthMetric Associated to this Id"));
