@@ -1,11 +1,12 @@
 package com.abdelaziz26.metriplate.configurations;
 
 import com.abdelaziz26.metriplate.repositories.UserRepository;
-import com.abdelaziz26.metriplate.security.CustomAccessDeniedHandler;
-import com.abdelaziz26.metriplate.security.CustomAuthenticationEntryPoint;
-import com.abdelaziz26.metriplate.security.JwtFilter;
-import com.abdelaziz26.metriplate.security.UserDetailsServiceImpl;
+import com.abdelaziz26.metriplate.security.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -30,12 +32,15 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SecurityConfig {
 
-    private final UserRepository userRepository;
-    private final JwtFilter jwtFilter;
-    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    UserRepository                 userRepository;
+    JwtFilter                      jwtFilter;
+    CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    CustomAccessDeniedHandler      customAccessDeniedHandler;
+    OAuthSuccessHandler            oAuthSuccessHandler;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -68,8 +73,9 @@ public class SecurityConfig {
 
                                 .requestMatchers("/api/orders/**").authenticated()
 
-                ).csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(AbstractHttpConfigurer::disable)
+                )
+                .oauth2Login(config -> config.successHandler(oAuthSuccessHandler))
+                .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(ehc ->
                         ehc.authenticationEntryPoint(customAuthenticationEntryPoint)
                                 .accessDeniedHandler(customAccessDeniedHandler)
@@ -83,7 +89,6 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Matches http://localhost:<any port> and http://127.0.0.1:<any port>
         configuration.setAllowedOriginPatterns(List.of(
                 "http://localhost:*",
                 "http://127.0.0.1:*"

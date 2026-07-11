@@ -38,15 +38,14 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String firstName;
 
-    @Size(min = 3, max = 10)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String lastName;
 
     @Email
     @Column(unique = true, nullable = false)
     private String email;
 
-    @NotBlank
+    @Column(nullable = true)
     private String password;
 
     private String otp;
