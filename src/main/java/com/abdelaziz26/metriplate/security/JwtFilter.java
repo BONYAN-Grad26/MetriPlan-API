@@ -32,6 +32,7 @@ public class JwtFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         boolean white = request.getServletPath().startsWith("/api/auth")
+                || request.getRequestURI().startsWith("/oauth2/authorization/google")
                 || request.getServletPath().startsWith("/v3/api-docs")
                 || request.getServletPath().startsWith("/swagger-ui")
                 || request.getServletPath().startsWith("/swagger-ui.html")
