@@ -64,7 +64,7 @@ public class IngredientServiceImpl implements IngredientService {
         if (pageIdx < 1) {
             return Result.CreateErrorResult(Errors.BadRequestErr("Page index must be >= 1"));
         }
-        Pageable pageable = PageRequest.of(pageIdx - 1, 10);
+        Pageable pageable = PageRequest.of(pageIdx - 1, 100);
         return Result.CreateSuccessResult(ingredientRepository.findAll(pageable).stream()
                 .map(ingredientMapper::toSummary)
                 .collect(Collectors.toList())
@@ -82,7 +82,7 @@ public class IngredientServiceImpl implements IngredientService {
             return getAll(pageIdx);
         }
 
-        Pageable pageable = PageRequest.of(pageIdx - 1, 10);
+        Pageable pageable = PageRequest.of(pageIdx - 1, 100);
         return Result.CreateSuccessResult(ingredientRepository.findAll(specs, pageable).stream()
                 .map(ingredientMapper::toSummary)
                 .collect(Collectors.toList())

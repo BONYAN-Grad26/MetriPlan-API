@@ -10,4 +10,5 @@ public interface DietWeeklyPlanRepository extends JpaRepository<WeeklyPlan, Long
     List<WeeklyPlan> findByUser_IdOrderByWeekNumberDesc(Long userId);
 
     boolean existsByUser_IdAndStartDateBeforeAndEndDateAfter(Long userId, LocalDate startDate, LocalDate endDate);
+
 }
